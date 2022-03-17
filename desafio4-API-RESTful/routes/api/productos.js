@@ -4,13 +4,6 @@ const router = express.Router();
 const ProductosAPI = require("../../ProductosAPI")
 const productosAPI = new ProductosAPI()
 
-//@route    GET /api/productos
-//@desc     Get Welcome
-//@access   Public
-router.get('/', (req, res) => {
-    res.send('<h1 style="color:blue">Bienvenidos al servidor express API PRODUCTOS</h1>')
-})
-
 //@route    GET /api/productos/
 //@desc     devuelve todos los productos
 //@access   Public
