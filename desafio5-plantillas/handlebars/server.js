@@ -1,8 +1,10 @@
 const express = require('express')
 const app = express()
-const handlebars=require("express-handlebars")
+const handlebars = require("express-handlebars")
 const PORT = process.env.PORT || 8080
 
+const ProductosAPI = require("./ProductosAPI")
+const productosAPI = new ProductosAPI()
 
 // Config para que express reconozca el body de una solicitud post
 // si no pongo esto no puede reconocer el req.body
@@ -18,10 +20,10 @@ app.use(express.urlencoded({extended:true}))
 
 //Configuracion de Handlebars
 app.engine("hbs", handlebars.engine({
-  extname: ".hbs",
-  defaultLayout: "index.hbs",
-  layoutDir: __dirname + "/views/layouts",
-  partialDir: __dirname+ "/views/partials"
+    extname: ".hbs",
+    defaultLayout: "index.hbs",
+    layoutDir: __dirname + "/views/layouts",
+    partialDir: __dirname+ "/views/partials"
 }))
 app.set("view engine", "hbs")
 app.set("views", "./views")
@@ -34,7 +36,19 @@ const server = app.listen(PORT, () => {
 server.on("error", error => console.log(`Error en servidor ${error}`))
 
 //Definir rutas 
-app.use('/api/productos', require('./routes/api/productos'))
+// app.use('/api/productos', require('./routes/api/productos'))
+
+app.get('/productos', (req, res) => {
+    const resultado = {productos: productosAPI.getAll()}
+    resultado.productos.length > 0 ?
+        res.render("productos", resultado) :
+        res.render("productos", { msg: "No hay productos" })
+})
+
+app.post('/productos', (req, res) => {
+    productosAPI.save(req.body)
+    res.redirect("/productos")
+})
 
 
-app.use("/static", express.static(__dirname+"/public"))
+app.use(/* "/static",  */express.static(__dirname + "/public"))
