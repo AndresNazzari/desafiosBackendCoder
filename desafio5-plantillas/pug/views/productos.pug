@@ -1,0 +1,22 @@
+html
+    head
+        title="hola"
+    body
+    table
+        tr
+            th #
+            th title
+            th price
+            th thumbnail
+        if productos
+            each producto in productos
+                tr
+                    td=producto.id 
+                    td=producto.title
+                    td=producto.price
+                    td
+                        img(src=producto.thumbnail) 
+        else
+            h1=msg
+
+    a(href="http://localhost:8080") Cargar nuevo producto
