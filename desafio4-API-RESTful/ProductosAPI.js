@@ -25,7 +25,7 @@ class ProductosAPI {
     updateItem(id,obj) {
         // actualiza item
         const index = this.productos.findIndex(producto=>producto.id==id)
-        this.productos.splice(index, 1, {...obj })
+        this.productos.splice(index, 1, {...obj,id })
         return { "msg": "producto actualizado" }
     }   
 
