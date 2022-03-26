@@ -1,0 +1,16 @@
+{
+  "name": "desafio6-websockets",
+  "version": "0.0.1",
+  "description": "Desafio 6 - Websockets",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "Andres Nazzari",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.3",
+    "socket.io": "^4.4.1"
+  }
+}

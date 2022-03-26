@@ -1,0 +1,49 @@
+<h1> Ingresar Nuevo Producto</h1>
+<form onsubmit='return addItem(this)'>
+    <label for='title'>Titulo</label>
+    <input type='text' name='title' id='itemTitle' />
+    <label for='price'>Precio</label>
+    <input type='text' name='price' id='itemPrice' />
+    <label for='thumbnail'>Imagen</label>
+    <input type='text' name='thumbnail' id='itemThumbnail' />
+    <input type='submit' value='Enviar' />
+</form>
+
+<h2> Productos</h2>
+<table class='table'>
+    <thead>
+        <tr>
+            <th scope='col'>#</th>
+            <th scope='col'>title</th>
+            <th scope='col'>price</th>
+            <th scope='col'>thumbnail</th>
+        </tr>
+    </thead>
+    <tbody id='tablaProductos'>
+        <h1>{{msg}}</h1>
+        {{#each productos}}
+            <tr>
+                <th scope='row'>{{id}}</th>
+                <td>{{title}}</td>
+                <td>{{price}}</td>
+                <td><img src='{{thumbnail}}' alt='' style='height:50px' /> </td>
+            </tr>
+        {{/each}}
+    </tbody>
+</table>
+<h2>Centro de Mensajes</h2>
+<form onsubmit='return addMessage(this)'>
+    <input type='email' id='email' placeholder='Tu email...' required />
+    <input type='text' id='texto' placeholder='Deja tu mensaje...' />
+    <input type='submit' value='Enviar' />
+</form>
+<div id='messages'>
+    {{#each messages}}
+        <div>
+            <strong style='color:blue'>{{email}}</strong>
+            <em style='color:brown'>{{date}}</em>:
+            <em style='color:green'>{{text}}</em>
+        </div>
+    {{/each}}
+
+</div>
