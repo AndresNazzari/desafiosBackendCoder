@@ -25,7 +25,8 @@ Router.post('/', async (req, res) => {
 //@access   Public
 Router.post('/:id/productos', async (req, res) => {
     const id = req.params.id
-    res.send(await carrito.saveProductosEnCarrito(id,req.body))
+    const producto = productos.getById(req.body.id)
+    res.send(await carrito.saveProductosEnCarrito(id, producto))
 })
 
 //@route    DELETE /api/carrito/
