@@ -65,7 +65,7 @@ class Carrito {
         const carritos = await this.getAllCarritos()
         const carritoIndex = carritos.findIndex(carrito=>carrito.id==carritoId)
         const productoIndex= carritos[carritoIndex].productos.findIndex(producto=>producto.id==productoId)
-        const result = carritos[carritoIndex].productos.splice(productoIndex,1)
+        carritos[carritoIndex].productos.splice(productoIndex,1)
         try {
             fs.writeFileSync(this.file, JSON.stringify(carritos, null, 2))
             return {"msg":"producto eliminado eliminado"}

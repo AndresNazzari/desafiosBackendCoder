@@ -4,6 +4,8 @@ const auth = require("../../middleware/auth")
 const file = process.cwd() + "/proyectoFinal/carritos.txt"
 const Carrito = require("../../classes/carrito")
 const carrito = new Carrito(file)
+const Productos = require("../../classes/productos")
+const productos = new Productos(file)
 
 //@route    GET /api/carrito/
 //@desc     Me permite listar todos los productos guardados en el carrito
