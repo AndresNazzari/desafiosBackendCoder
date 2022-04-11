@@ -4,7 +4,7 @@ const options = {
         host:"localhost",
         user:"root",
         password:"",
-        database: "desafio8_DB"
+        database: "desafio8_bd"
     }
 }
-module.exports={options}
+module.exports= options

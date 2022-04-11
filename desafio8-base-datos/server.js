@@ -8,13 +8,17 @@ const app = express();
 const httpServer = new HttpServer(app);
 const io = new IOServer(httpServer);
 
-const file = process.cwd() + '/productos.txt';
-const ProductosAPI = require('./ProductosAPI');
-const productosAPI = new ProductosAPI(file);
+const createTable=require('./create_table.js');
+const optionsMariaDB = require('./options/mariaDB')
+const optionsSqlite3 = require('./options/sqlite3')
+createTable(optionsMariaDB, optionsSqlite3)
 
-const messagesFile = process.cwd() + '/messages.txt';
+const ProductosAPI = require('./ProductosAPI');
+const productosAPI = new ProductosAPI(optionsMariaDB, "productos");
+
 const MessagesAPI = require('./MessagesAPI');
-const messagesAPI = new MessagesAPI(messagesFile);
+const messagesAPI = new MessagesAPI(optionsSqlite3,"mensajes");
+
 
 // Config para que express reconozca el body de una solicitud post
 // si no pongo esto no puede reconocer el req.body
@@ -22,17 +26,14 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 //Configuracion de Handlebars
-app.engine(
-    'hbs',
-    handlebars.engine({
-        extname: '.hbs',
-        defaultLayout: 'index.hbs',
-        layoutDir: __dirname + '/views/layouts',
-        partialDir: __dirname + '/views/partials',
-    })
-);
-app.set('view engine', 'hbs');
-app.set('views', './views');
+app.engine("hbs", handlebars.engine({
+    extname: ".hbs",
+    defaultLayout: "index.hbs",
+    layoutDir: __dirname + "/views/layouts",
+    partialDir: __dirname+ "/views/partials"
+}))
+app.set("view engine", "hbs")
+app.set("views", __dirname +"/views")
 
 const server = httpServer.listen(PORT, () => {
     console.log(
