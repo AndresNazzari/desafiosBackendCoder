@@ -1,6 +1,8 @@
 const createTable = (optionsMariaDB, optionsSqlite3) => {
     const knexMariaDB = require('knex')(optionsMariaDB);
-    knexMariaDB.schema.hasTable('productos').then((exists) => {
+    knexMariaDB.schema
+        .hasTable('productos')
+        .then((exists) => {
             if (!exists) {
                 knexMariaDB.schema
                     .createTable('productos', (table) => {
@@ -51,14 +53,14 @@ const createTable = (optionsMariaDB, optionsSqlite3) => {
                         knexSqlite3.destroy();
                     });
             } else {
-                console.log('Ya existe la tabla productos MariaDB');
+                console.log('Ya existe la tabla Mensajes SQLITE3');
             }
         })
         .catch((error) => {
             console.log(error);
         })
         .finally(() => {
-            knexMariaDB.destroy();
+            knexSqlite3.destroy();
         });
 };
 
