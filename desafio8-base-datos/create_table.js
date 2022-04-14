@@ -40,7 +40,10 @@ const createTable = (optionsMariaDB, optionsSqlite3) => {
                     .createTable('mensajes', (table) => {
                         table.increments('id');
                         table.string('email');
-                        table.string('date');
+                        table
+                            .timestamp('date', { useTz: true })
+                            .notNullable()
+                            .defaultTo(knex.fn.now());
                         table.string('text');
                     })
                     .then(() => {

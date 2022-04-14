@@ -53,7 +53,7 @@ io.on('connection', async (socket) => {
     const productosCargados = { productos: await productosAPI.getAll() };
 
     productosCargados.productos.length > 0 &&
-        io.sockets.emit('productos', productosCargados);
+        socket.emit('productos', productosCargados);
 
     socket.on('addItem', async (data) => {
         //grabar item en archivo

@@ -5,7 +5,7 @@ class ProductosAPI {
     }
 
     async save(obj) {
-        this.knex(this.table)
+        return this.knex(this.table)
             .insert(obj)
             .then((id) => {
                 const newProduct = { ...obj, id: id[0] };
