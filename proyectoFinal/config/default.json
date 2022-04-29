@@ -1,6 +1,17 @@
 {
     "comentario": "En useDB poner 'fs', 'mongo' o 'firebase'",
-    "useDB": "mongo",
+    "useDB": "firebase",
     "mongo": "mongodb+srv://admin:admin@cluster0.jlce7.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
-    "firebase": ""
+    "firebase": {
+        "type": "service_account",
+        "project_id": "coderbackend-8868f",
+        "private_key_id": "429352798821a35adc49c36a82a763fe42207965",
+        "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDwUSWUEwSWNCjt\n2FysPX5hQ6aAVQra0y9V365PzbR8PyQpt8BR1yLLViD+iQEXdqCWW3ZKP8O2h8ns\nOxAihjFMmy4NyzzkeDCkg+ZvJmAdYWerAnKbfqxvBW13VYUI3eP4bIPXMt+GEHGR\negPeMlbO6Fw8rCSvPh4iKAlI0cn8Jj8rPjYVuzacgUEBffAPHCrUyuNL9rZbt63h\nZ39DsjqCRMbcCsdQdsRRUWhwEFJvjE99rMkel1m5ai4R1c1WcyLzFJ5kLUMNUHok\nHCMjpvtGFTvIPo+/otnb8Q6ZHi+RudDq2wotyCKgWnJQGw9JFGv8eGYOZseYd0xw\n17je2uilAgMBAAECggEADINlLgcpe3q+0Netx6gyDvV7U35aINfTRKjvhidDaR7O\njr+LK5fEr4rOEALpRCQAq6OajrYwRi5e5MaUif+rzH3eEYjOJGVfvwlBM/NvGMiM\nIdrwRcl8SBGjyA1zbmlDaBmaadezzOLJTxZn4ieD3qU5vE0IYfmdjxC/nwORfWgU\nlbpCR96TJKOSFFilQySCKkUkQZRsYwLS6bYxt47RlG/PQuw7dHM0nX76OIhCQBOz\nFFpp/qM9yGSq8+LAWafCOIlvbu6BMTwEpBQr6Vlc4D8X7Lq8Q9FjiBuNEVyaa1Qq\ncyuysXWUcgl218aQ67uQLMSZ2kLt50LDSjwv3GiDsQKBgQD/Ff2yQHXETcN/SoJb\n5lcOMDUKnyVymF38ZdfYcwUB3sI1i/ICfg848pfIumT0BexLEdBtiK3ESZd71xG6\n2FXqMqEu9iSisCbqX++Kh/AbgnnyyhTMoG8mK9lWDvoFLKdHOjDvJ4OxEriAxTj+\nlwzzsjZqSdZ9R+2Jz2jQtbybHQKBgQDxLZtvwY1jXOdWhRQjnDPtqRnW0gzxvEho\nQxoQ1amlxW01xenao3fuV3D9aCO26LW5LIu5d5ZbXM9BxejZ3F3SXfpIbiaf271u\nmdcmp2WJj1I0Vqw4Lxgk2m8t1ljYStjdiQswgWOyIqAwijb4oTBTBMUk2cXNseZB\nCV9yJlCFKQKBgQDveV/A9o8ZCcBdQj/7stVLtqo1HI91c+HYUGxBAkpTJSPCTW2Y\nNWxpFCa3BXY9OUpKd6DrFAO+YTBbzN8SQIL36Sw1AFQIf8MpCYPC1DfwO5/s9RZt\nvLhcZ5IUHt9N+EvarKDABKK3nFGmYoFNUdWQ+1/mjQdWei5g0F0gg11baQKBgQCn\nUAVqJTNKAFR4wD+1aJLZyBsl3XifZwgwVITLsv5LA0h9KnzOceMslLrNAabtKEmR\nWebg1qaXYS5jKcIdCXSJESslfk0LT2z+Qnlw1mZpZOUZbBtzqrAsOOEyQmZGPr5u\nCbmaf9jC5qSMqAX0vBYDMeb2ZqGDzmu3KKJvVUc86QKBgDA53wOoLPu5Q+4quzbx\nQzl0wIuqA4u2UJnq05l6b3c2s4KG/ZnO6K+2SKQMPrMZqoEy6I4EC3kB5y/dgeKH\n8C8gNxMpetoxpL4iYfn9L+tVDjAKTxRewhiCHqS06tZrDSfy1eN+6bbxSLNoJWXS\nlPGpKSn9abWxtM/PYwB9oxl6\n-----END PRIVATE KEY-----\n",
+        "client_email": "firebase-adminsdk-8a00p@coderbackend-8868f.iam.gserviceaccount.com",
+        "client_id": "117886771845087461175",
+        "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+        "token_uri": "https://oauth2.googleapis.com/token",
+        "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+        "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-8a00p%40coderbackend-8868f.iam.gserviceaccount.com"
+    }
 }

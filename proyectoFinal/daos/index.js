@@ -9,6 +9,7 @@ import { ProductosDaoFirebase } from './productos/ProductosDaoFirebase.js';
 import { CarritosDaoMongo } from './carritos/CarritosDaoMongo.js';
 import { ProductosDaoMongo } from './productos/ProductosDaoMongo.js';
 
+//esto viene del archivo default.json de la carpeta config, indica que tipo de persistencia se va a usar
 const db = config.get('useDB');
 
 //REALIZAR SWITCH e instanciar DAO segun  la persistencia
@@ -35,8 +36,8 @@ switch (db) {
         break;
     case 'firebase':
         firebaseDB();
-        productosApi = new ProductosDaoFirebase();
-        carritosApi = new CarritosDaoFirebase();
+        productosApi = new ProductosDaoFirebase('productos');
+        carritosApi = new CarritosDaoFirebase('carritos');
         break;
 }
 
