@@ -1,6 +1,6 @@
 import fs from 'fs';
 
-export default class ContenedorFs {
+export class ContenedorFs {
     constructor(file) {
         this.file = file;
     }

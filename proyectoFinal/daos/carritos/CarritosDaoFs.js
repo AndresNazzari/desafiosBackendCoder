@@ -1,7 +1,7 @@
-import ContenedorFs from '../../classes/contenedorFs.js';
+import { ContenedorFs } from '../../classes/contenedorFs.js';
 import fs from 'fs';
 
-export default class CarritosDaoFs extends ContenedorFs {
+export class CarritosDaoFs extends ContenedorFs {
     constructor(file) {
         super(file);
     }

@@ -1,5 +1,5 @@
-import ContenedorFirebase from '../../classes/ContenedorFirebase';
+import { ContenedorFirebase } from '../../classes/ContenedorFirebase.js';
 
-export default class CarritosDaoFirebase extends ContenedorFirebase {
+export class CarritosDaoFirebase extends ContenedorFirebase {
     constructor() {}
 }

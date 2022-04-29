@@ -22,9 +22,9 @@ Router.post('/', async (req, res) => {
 //@desc     Para incorporar productos al carrito por su id de producto
 //@access   Public
 Router.post('/:id/productos', async (req, res) => {
-    const id = req.params.id;
-    const producto = productosApi.getById(req.body.id);
-    res.send(await carritosApi.saveProductosEnCarrito(id, producto));
+    const idCarrito = req.params.id;
+    const idProducto = req.body.id;
+    res.send(await carritosApi.saveProductosEnCarrito(idCarrito, idProducto));
 });
 
 //@route    DELETE /api/carrito/
@@ -32,10 +32,8 @@ Router.post('/:id/productos', async (req, res) => {
 //@access   Public
 Router.delete('/:id', async (req, res) => {
     const id = req.params.id;
-    const result = await carritosApi.deleteCarritoById(id);
-    result
-        ? res.send(resultcarritosApi)
-        : res.send({ error: 'carrito no encontrado' });
+    const result = await carritosApi.deleteById(id);
+    result ? res.send(result) : res.send({ error: 'carrito no encontrado' });
 });
 
 //@route    DELETE /api/carrito/

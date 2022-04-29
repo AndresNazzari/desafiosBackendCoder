@@ -1,7 +1,7 @@
 import config from 'config';
 const db = config.get('firebase');
 
-export default firebaseDB = async () => {
+export const firebaseDB = async () => {
     try {
         console.log('Firebase Connected...');
     } catch (err) {

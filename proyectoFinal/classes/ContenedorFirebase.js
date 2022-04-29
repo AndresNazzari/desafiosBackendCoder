@@ -1,3 +1,3 @@
-export default class ContenedorFirebase {
+export class ContenedorFirebase {
     constructor() {}
 }
