@@ -1,19 +1,22 @@
 import { ContenedorFirebase } from '../../classes/ContenedorFirebase.js';
+import admin from 'firebase-admin';
 
 export class ProductosDaoFirebase extends ContenedorFirebase {
     constructor(collection) {
         super(collection);
     }
     async save(producto) {
-        /*         const nuevoProducto = new Producto({
-            ...producto,
-        });
-        return await nuevoProducto.save(); */
+        try {
+            const doc = this.query.doc();
+            return await doc.create(producto);
+        } catch (error) {
+            throw new Error(`Error en Save! ${error.message}`);
+        }
     }
 
     async updateItem(id, obj) {
         try {
-            /*             const productoUpdate = await Producto.findByIdAndUpdate(id, obj); */
+            await this.query.doc(id).set(obj);
             return { msg: 'producto actualizado' };
         } catch (error) {
             throw new Error(`Error en Update! ${error.message}`);

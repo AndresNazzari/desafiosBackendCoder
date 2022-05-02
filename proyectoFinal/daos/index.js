@@ -35,7 +35,7 @@ switch (db) {
         carritosApi = new CarritosDaoMongo('carritos');
         break;
     case 'firebase':
-        firebaseDB();
+        await firebaseDB();
         productosApi = new ProductosDaoFirebase('productos');
         carritosApi = new CarritosDaoFirebase('carritos');
         break;

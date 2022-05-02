@@ -1,23 +1,17 @@
+import admin from 'firebase-admin';
+
 export class ContenedorFirebase {
     constructor(collection) {
-        this.collection = collection;
-    }
-    async deleteById(id) {
-        try {
-            /*this.collection == 'productos'
-                ? await Producto.deleteOne({ _id: id })
-                : await Carrito.deleteOne({ _id: id });
-            return { msg: 'item eliminado' }; */
-        } catch (error) {
-            throw new Error(`Error en Delete by ID! ${error.message}`);
-        }
+        this.db = admin.firestore();
+        this.query = this.db.collection(collection);
     }
 
     async getAll() {
         try {
-            /*             return this.collection == 'productos'
-                ? await Producto.find({})
-                : await Carrito.find({}); */
+            const snapshot = await this.query.get();
+            return snapshot.docs.map((doc) => {
+                return { ...doc.data(), id: doc.id };
+            });
         } catch (error) {
             console.log(error);
             return [];
@@ -26,9 +20,17 @@ export class ContenedorFirebase {
 
     async getById(id) {
         try {
-            /*             return await Producto.find({ _id: id }); */
+            return this.query.doc(id).get();
         } catch (error) {
             console.log(`Error en Get by ID! ${error.message}`);
+        }
+    }
+    async deleteById(id) {
+        try {
+            await this.query.doc(id).delete();
+            return { msg: 'item eliminado' };
+        } catch (error) {
+            throw new Error(`Error en Delete by ID! ${error.message}`);
         }
     }
 }

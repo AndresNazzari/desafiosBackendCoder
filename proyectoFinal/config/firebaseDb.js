@@ -1,12 +1,12 @@
 import config from 'config';
 import admin from 'firebase-admin';
 
-const db = config.get('firebase');
-
 export const firebaseDB = async () => {
+    const db = config.get('firebase');
     try {
         admin.initializeApp({
             credential: admin.credential.cert(db),
+            databaseURL: 'https://coderbackend-8868f.firebaseio.com',
         });
         console.log('Firebase Connected...');
     } catch (err) {

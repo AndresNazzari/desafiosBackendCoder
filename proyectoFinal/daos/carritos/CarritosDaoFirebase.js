@@ -1,14 +1,16 @@
 import { ContenedorFirebase } from '../../classes/ContenedorFirebase.js';
 
 export class CarritosDaoFirebase extends ContenedorFirebase {
-    constructor() {
-        super();
+    constructor(collection) {
+        super(collection);
     }
 
     async crearCarrito() {
         try {
-            /*             const nuevoCarrito = new Carrito({});
-            return await nuevoCarrito.save(); */
+            const carrito = await this.query
+                .doc()
+                .create({ timestamp: new Date(), productos: [] });
+            return { msg: 'carrito creado' };
         } catch (error) {
             throw new Error(`Error en Save! ${error.message}`);
         }
@@ -29,10 +31,16 @@ export class CarritosDaoFirebase extends ContenedorFirebase {
 
     async saveProductosEnCarrito(idCarrito, idProducto) {
         try {
-            /*             const carritoEncontrado = await Carrito.findById(idCarrito);
-            const productoEncontrado = await super.getById(idProducto);
-            carritoEncontrado.productos.push(productoEncontrado[0]);
-            await carritoEncontrado.save(); */
+            /*   const productoAgregar = await this.db
+                .collection('productos')
+                .doc(idProducto)
+                .get();
+
+            const snap = await this.query.doc(idCarrito).get();
+            const ref = await snap.push(productoAgregar.data());
+
+            return ref; */
+            /* { msg: 'producto actualizado' }; */
         } catch (error) {
             throw new Error(
                 `Error agregado producto al carrito! ${error.message}`
