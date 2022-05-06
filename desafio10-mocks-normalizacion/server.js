@@ -3,14 +3,15 @@ const { Server: IOServer } = require('socket.io');
 const { Server: HttpServer } = require('http');
 const handlebars = require('express-handlebars');
 const PORT = process.env.PORT || 8080;
+const { faker } = require('@faker-js/faker');
 
 const app = express();
 const httpServer = new HttpServer(app);
 const io = new IOServer(httpServer);
 
 const createTable = require('./create_table.js');
-const optionsMariaDB = require('./options/mariaDB');
-const optionsSqlite3 = require('./options/sqlite3');
+const optionsMariaDB = require('./options/mariaDB.js');
+const optionsSqlite3 = require('./options/sqlite3.js');
 createTable(optionsMariaDB, optionsSqlite3);
 
 const ProductosAPI = require('./ProductosAPI');
@@ -44,16 +45,24 @@ const server = httpServer.listen(PORT, () => {
 });
 server.on('error', (error) => console.log(`Error en servidor ${error}`));
 
-app.get('/', (req, res) => {
+app.get('/api/productos-test', (req, res) => {
     res.render('productos');
 });
 
 io.on('connection', async (socket) => {
     console.log('Usuario conectado');
-    const productosCargados = { productos: await productosAPI.getAll() };
+    const productosCargados = [];
+    for (let i = 0; i < 6; i++) {
+        const producto = {
+            price: faker.commerce.price(),
+            title: faker.commerce.product(),
+            thumbnail: faker.image.imageUrl(),
+        };
+        productosCargados.push(producto);
+    }
+    /* const productosCargados ={ productos: await productosAPI.getAll() }; */
 
-    productosCargados.productos.length > 0 &&
-        socket.emit('productos', productosCargados);
+    productosCargados.length > 0 && socket.emit('productos', productosCargados);
 
     socket.on('addItem', async (data) => {
         //grabar item en archivo

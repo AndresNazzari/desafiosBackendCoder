@@ -1,9 +1,9 @@
 const options = {
-    client: "sqlite3",
+    client: 'sqlite3',
     connection: {
-        filename:"./desafio8-base-datos/mensajes.sqlite3"
+        filename: './desafio10-mocks-normalizacion/mensajes.sqlite3',
     },
-    useNullAsDefault: true
-}
+    useNullAsDefault: true,
+};
 
-module.exports=options
+module.exports = options;

@@ -34,11 +34,10 @@ function addItem(e) {
 }
 
 function renderProductos(data) {
-    const html = data.productos
+    const html = data
         .map((elem, index) => {
             return `  
         <tr>
-        <th scope='row'>${elem.id}</th>
         <td>${elem.title}</td>
         <td>${elem.price}</td>
         <td><img src=${elem.thumbnail} alt='' style="height:50px"/> </td>

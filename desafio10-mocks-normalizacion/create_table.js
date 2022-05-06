@@ -1,5 +1,6 @@
 const createTable = (optionsMariaDB, optionsSqlite3) => {
     const knexMariaDB = require('knex')(optionsMariaDB);
+
     knexMariaDB.schema
         .hasTable('productos')
         .then((exists) => {
@@ -43,7 +44,7 @@ const createTable = (optionsMariaDB, optionsSqlite3) => {
                         table
                             .timestamp('date', { useTz: true })
                             .notNullable()
-                            .defaultTo(knex.fn.now());
+                            .defaultTo(knexSqlite3.fn.now());
                         table.string('text');
                     })
                     .then(() => {

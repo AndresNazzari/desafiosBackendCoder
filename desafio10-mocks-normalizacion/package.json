@@ -1,11 +1,25 @@
 {
-  "name": "desafio10-mocks-normalizacion",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "",
-  "license": "ISC"
+    "name": "desafio10-mocks-normalizacion",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "server": "nodemon --inspect server.js"
+    },
+    "dependencies": {
+        "express": "^4.17.3",
+        "express-handlebars": "^6.0.3",
+        "knex": "^0.95.15",
+        "moment": "^2.29.1",
+        "mysql": "^2.18.1",
+        "nodemon": "^2.0.15",
+        "normalizr": "^3.6.2",
+        "socket.io": "^4.4.1",
+        "sqlite3": "^5.0.2"
+    },
+    "author": "",
+    "license": "ISC",
+    "devDependencies": {
+        "@faker-js/faker": "^6.3.1"
+    }
 }

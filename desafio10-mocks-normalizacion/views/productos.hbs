@@ -1,5 +1,5 @@
-<h1> Ingresar Nuevo Producto</h1>
-<form onsubmit='return addItem(this)'>
+<h1> Productos</h1>
+{{! <form onsubmit='return addItem(this)'>
     <label for='title'>Titulo</label>
     <input type='text' name='title' id='itemTitle' />
     <label for='price'>Precio</label>
@@ -7,13 +7,12 @@
     <label for='thumbnail'>Imagen</label>
     <input type='text' name='thumbnail' id='itemThumbnail' />
     <input type='submit' value='Enviar' />
-</form>
+</form> }}
 
 <h2> Productos</h2>
 <table class='table'>
     <thead>
         <tr>
-            <th scope='col'>#</th>
             <th scope='col'>title</th>
             <th scope='col'>price</th>
             <th scope='col'>thumbnail</th>
