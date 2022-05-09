@@ -17,8 +17,10 @@ createTable(optionsMariaDB, optionsSqlite3);
 const ProductosAPI = require('./ProductosAPI');
 const productosAPI = new ProductosAPI(optionsMariaDB, 'productos');
 
+const messagesFile =
+    process.cwd() + '/desafio10-mocks-normalizacion/messages.txt';
 const MessagesAPI = require('./MessagesAPI');
-const messagesAPI = new MessagesAPI(optionsSqlite3, 'mensajes');
+const messagesAPI = new MessagesAPI(messagesFile);
 
 // Config para que express reconozca el body de una solicitud post
 // si no pongo esto no puede reconocer el req.body

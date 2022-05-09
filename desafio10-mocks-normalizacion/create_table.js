@@ -32,7 +32,7 @@ const createTable = (optionsMariaDB, optionsSqlite3) => {
             knexMariaDB.destroy();
         });
 
-    const knexSqlite3 = require('knex')(optionsSqlite3);
+    /*  const knexSqlite3 = require('knex')(optionsSqlite3);
     knexSqlite3.schema
         .hasTable('productos')
         .then((exists) => {
@@ -65,7 +65,7 @@ const createTable = (optionsMariaDB, optionsSqlite3) => {
         })
         .finally(() => {
             knexSqlite3.destroy();
-        });
+        }); */
 };
 
 module.exports = createTable;

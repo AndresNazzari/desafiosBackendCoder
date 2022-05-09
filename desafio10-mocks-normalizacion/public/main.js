@@ -2,9 +2,16 @@ const socket = io();
 
 function addMessage(e) {
     const mensaje = {
-        email: document.getElementById('email').value,
-        date: new Date().toLocaleString(),
+        author: {
+            id: document.getElementById('id').value,
+            nombre: document.getElementById('nombre').value,
+            apellido: document.getElementById('apellido').value,
+            alias: document.getElementById('alias').value,
+            edad: document.getElementById('edad').value,
+            avatar: document.getElementById('avatar').value,
+        },
         text: document.getElementById('texto').value,
+        date: new Date().toLocaleString(),
     };
     socket.emit('newMessage', mensaje);
     return false;
@@ -14,9 +21,10 @@ function renderMessages(data) {
     const html = data.messages
         .map((elem, index) => {
             return `<div>
-            <strong style="color:blue">${elem.email}</strong>
+            <strong style="color:blue">${elem.author.id}</strong>
             <em style="color:brown">${elem.date}</em>: 
             <em style="color:green">${elem.text}</em>
+            <img src=${elem.author.avatar} alt='' style="height:50px"/>
             </div>`;
         })
         .join(' ');
