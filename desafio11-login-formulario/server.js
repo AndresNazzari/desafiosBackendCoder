@@ -53,16 +53,7 @@ app.get('/api/productos-test', (req, res) => {
 
 io.on('connection', async (socket) => {
     console.log('Usuario conectado');
-    const productosCargados = [];
-    for (let i = 0; i < 6; i++) {
-        const producto = {
-            price: faker.commerce.price(),
-            title: faker.commerce.product(),
-            thumbnail: faker.image.imageUrl(),
-        };
-        productosCargados.push(producto);
-    }
-    /* const productosCargados ={ productos: await productosAPI.getAll() }; */
+    const productosCargados = { productos: await productosAPI.getAll() };
 
     productosCargados.length > 0 && socket.emit('productos', productosCargados);
 

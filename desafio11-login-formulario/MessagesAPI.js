@@ -7,18 +7,8 @@ class MessagesAPI {
     }
 
     async save(obj) {
-        // Recibe un objeto, lo guarda en el archivo, devuelve el id asignado
-        // El método save incorporará al producto un id numérico, que deberá ser siempre uno más que el id del último
-        // objeto agregado(o id 1 si es el primer objeto que se agrega) y no puede estar repetido.
         try {
             const messages = await this.getAll();
-
-            //obtengo data
-            //desnormalizo
-            //agrego nuevo mensaje
-            //normalizo
-            // grabo data
-
             let id;
             if (messages.length > 0) {
                 id = messages[messages.length - 1].id + 1;
@@ -26,9 +16,6 @@ class MessagesAPI {
                 id = 1;
             }
             const newMessage = { ...obj, id };
-
-            const dataNormalizada = normalize(newMessage, messagesSchema);
-            console.log(dataNormalizada);
 
             messages.push(newMessage);
             await fs.promises.writeFile(
