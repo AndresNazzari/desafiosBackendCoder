@@ -1,12 +1,13 @@
 const fs = require('fs');
-const messagesSchema = require('./schemas/messagesSchema');
-
 class MessagesAPI {
     constructor(file) {
         this.file = file;
     }
 
     async save(obj) {
+        // Recibe un objeto, lo guarda en el archivo, devuelve el id asignado
+        // El método save incorporará al producto un id numérico, que deberá ser siempre uno más que el id del último
+        // objeto agregado(o id 1 si es el primer objeto que se agrega) y no puede estar repetido.
         try {
             const messages = await this.getAll();
             let id;
@@ -16,7 +17,6 @@ class MessagesAPI {
                 id = 1;
             }
             const newMessage = { ...obj, id };
-
             messages.push(newMessage);
             await fs.promises.writeFile(
                 this.file,

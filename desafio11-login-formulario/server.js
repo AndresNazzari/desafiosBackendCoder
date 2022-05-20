@@ -1,24 +1,22 @@
 const express = require('express');
+const handlebars = require('express-handlebars');
+const cookieParser = require('cookie-parser');
+const session = require('express-session');
+const MongoStore = require('connect-mongo');
 const { Server: IOServer } = require('socket.io');
 const { Server: HttpServer } = require('http');
-const handlebars = require('express-handlebars');
+const auth = require('./middleware/auth');
 const PORT = process.env.PORT || 8080;
-const { faker } = require('@faker-js/faker');
 
 const app = express();
 const httpServer = new HttpServer(app);
 const io = new IOServer(httpServer);
 
-const createTable = require('./create_table.js');
-const optionsMariaDB = require('./options/mariaDB.js');
-const optionsSqlite3 = require('./options/sqlite3.js');
-createTable(optionsMariaDB, optionsSqlite3);
-
+const file = process.cwd() + '/productos.txt';
 const ProductosAPI = require('./ProductosAPI');
-const productosAPI = new ProductosAPI(optionsMariaDB, 'productos');
+const productosAPI = new ProductosAPI(file);
 
-const messagesFile =
-    process.cwd() + '/desafio10-mocks-normalizacion/messages.txt';
+const messagesFile = process.cwd() + '/messages.txt';
 const MessagesAPI = require('./MessagesAPI');
 const messagesAPI = new MessagesAPI(messagesFile);
 
@@ -26,7 +24,26 @@ const messagesAPI = new MessagesAPI(messagesFile);
 // si no pongo esto no puede reconocer el req.body
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-
+//Config de cookies y session pára mongo atlas
+const advancedMongoOptions = {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+};
+app.use(cookieParser());
+app.use(
+    session({
+        store: MongoStore.create({
+            mongoUrl:
+                'mongodb+srv://admin:admin@cluster0.jlce7.mongodb.net/sessions?retryWrites=true&w=majority',
+            ttl: 1000 * 60 * 10,
+            mongoOptions: advancedMongoOptions,
+        }),
+        secret: 'keyboardCat',
+        resave: false,
+        saveUninitialized: false,
+        maxAge: 1000 * 60 * 10,
+    })
+);
 //Configuracion de Handlebars
 app.engine(
     'hbs',
@@ -38,7 +55,7 @@ app.engine(
     })
 );
 app.set('view engine', 'hbs');
-app.set('views', __dirname + '/views');
+app.set('views', './views');
 
 const server = httpServer.listen(PORT, () => {
     console.log(
@@ -47,31 +64,46 @@ const server = httpServer.listen(PORT, () => {
 });
 server.on('error', (error) => console.log(`Error en servidor ${error}`));
 
-app.get('/api/productos-test', (req, res) => {
-    res.render('productos');
+app.get('/productos', auth, (req, res) => {
+    res.render('productos', { userName: req.session.userName });
+});
+
+app.get('/login', (req, res) => {
+    res.render('login');
+});
+
+app.post('/login', (req, res) => {
+    const { name } = req.body;
+    req.session.userName = name;
+    res.redirect('/productos');
+});
+
+app.post('/logout', (req, res) => {
+    res.render('logout', { userName: req.session.userName });
+    req.session.destroy();
 });
 
 io.on('connection', async (socket) => {
     console.log('Usuario conectado');
     const productosCargados = { productos: await productosAPI.getAll() };
+    productosCargados.productos.length > 0 &&
+        socket.emit('productos', productosCargados);
 
-    productosCargados.length > 0 && socket.emit('productos', productosCargados);
+    const messagesCargados = { messages: await messagesAPI.getAll() };
+    messagesCargados.messages.length > 0 &&
+        socket.emit('messages', messagesCargados);
 
     socket.on('addItem', async (data) => {
         //grabar item en archivo
-        await productosAPI.save(data);
+        const a = await productosAPI.save(data);
         //hacer io.sockets.emit con todos los productos
         const resultado = { productos: await productosAPI.getAll() };
         io.sockets.emit('productos', resultado);
     });
 
-    const messagesCargados = { messages: await messagesAPI.getAll() };
-    messagesCargados.messages.length > 0 &&
-        io.sockets.emit('messages', messagesCargados);
-
     socket.on('newMessage', async (data) => {
         //grabar item en archivo
-        await messagesAPI.save(data);
+        const a = await messagesAPI.save(data);
         //hacer io.sockets.emit con todos los productos
         const resultado = { messages: await messagesAPI.getAll() };
         io.sockets.emit('messages', resultado);
