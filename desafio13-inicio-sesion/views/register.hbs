@@ -1,14 +1,16 @@
 <div class='container my-5'>
     <div class='jumbotron'>
-        <h1>LOGIN</h1>
+
+        <h1>REGISTER</h1>
         <br />
         <form
             class='form'
-            action='/login'
+            action='/register'
             method='post'
             role='form'
             autocomplete='off'
         >
+
             <div class='form-group'>
                 <input
                     id='username'
@@ -35,16 +37,19 @@
                 <input
                     class='btn btn-success my-3'
                     type='submit'
-                    value='Login'
+                    value='Register'
                 />
             </div>
         </form>
+
         <hr />
+
         <div class='text-left'>
             <button
                 class='btn btn-success my-3'
-                onclick="location.href = '/register'"
-            >Ir a Register</button>
+                onclick="location.href = '/login'"
+            >Ir a Login</button>
         </div>
+
     </div>
 </div>
