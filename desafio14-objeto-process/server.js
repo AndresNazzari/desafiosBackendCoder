@@ -112,6 +112,9 @@ app.set('view engine', 'hbs');
 app.set('views', './views');
 
 /*============================[Rutas]============================*/
+app.use('/api/info', require('./routes/api/info.route.js'));
+app.use('/api/randoms', require('./routes/api/randoms.route.js'));
+
 app.get('/productos', isAuth, (req, res) => {
     res.render('productos', { username: req.session.passport.user });
 });
@@ -202,7 +205,8 @@ io.on('connection', async (socket) => {
 });
 
 /*============================[Servidor]============================*/
-const PORT = process.env.PORT || 8080;
+const PORT = process.argv[2] || process.env.PORT || 3000;
+
 const server = httpServer.listen(PORT, () => {
     console.log(
         `Servidor http escuchando en el puerto ${server.address().port}`
