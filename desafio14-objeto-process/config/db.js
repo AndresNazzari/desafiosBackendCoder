@@ -1,7 +1,8 @@
 const mongoose = require('mongoose');
+const config = require('./config.js');
 
 const db =
-    process.env.MONGO_URI ||
+    config.MONGO_URI ||
     'mongodb+srv://admin:admin@cluster0.jlce7.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
 
 const connectDB = async () => {
