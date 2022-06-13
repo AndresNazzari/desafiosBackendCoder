@@ -1,5 +1,6 @@
 const express = require('express');
-require('dotenv').config({ path: './.env' });
+require('dotenv').config();
+const config = require('./config/config.js');
 const handlebars = require('express-handlebars');
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
@@ -12,7 +13,6 @@ const { Server: HttpServer } = require('http');
 const auth = require('./middleware/auth.js');
 const connectDB = require('./config/db.js');
 const User = require('./models/User.js');
-
 const app = express();
 const httpServer = new HttpServer(app);
 const io = new IOServer(httpServer);
@@ -82,8 +82,7 @@ app.use(cookieParser());
 app.use(
     session({
         store: MongoStore.create({
-            mongoUrl:
-                'mongodb+srv://admin:admin@cluster0.jlce7.mongodb.net/sessions?retryWrites=true&w=majority',
+            mongoUrl: config.MONGO_URI,
             ttl: 600, // valor ttl del store de mongo que en este caso serían 600 segundos ( un minuto ). Lo que ofrece el ttl es que en cada interacción del usuario este tiempo máximo se recarga, ( Vuelve a 600 ).
             mongoOptions: advancedMongoOptions,
         }),
@@ -94,7 +93,6 @@ app.use(
         maxAge: null, //el atributo maxAge de cookie ( esta vez sí en milisegundos) y además utilizando el valor rolling de sesiones en true, gracias a rolling cada vez que se realiza una interacción del usuario al servidor va a renovar el tiempo de expiración de la cookie.
     })
 );
-
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -180,12 +178,10 @@ app.use(express.static(__dirname + '/public'));
 io.on('connection', async (socket) => {
     console.log('Usuario conectado');
     const productosCargados = { productos: await productosAPI.getAll() };
-    productosCargados.productos.length > 0 &&
-        socket.emit('productos', productosCargados);
+    productosCargados.productos.length > 0 && socket.emit('productos', productosCargados);
 
     const messagesCargados = { messages: await messagesAPI.getAll() };
-    messagesCargados.messages.length > 0 &&
-        socket.emit('messages', messagesCargados);
+    messagesCargados.messages.length > 0 && socket.emit('messages', messagesCargados);
 
     socket.on('addItem', async (data) => {
         //grabar item en archivo
@@ -205,11 +201,8 @@ io.on('connection', async (socket) => {
 });
 
 /*============================[Servidor]============================*/
-const PORT = process.argv[2] || process.env.PORT || 3000;
 
-const server = httpServer.listen(PORT, () => {
-    console.log(
-        `Servidor http escuchando en el puerto ${server.address().port}`
-    );
+const server = httpServer.listen(config.PORT, () => {
+    console.log(`Servidor http escuchando en el puerto ${server.address().port}`);
 });
 server.on('error', (error) => console.log(`Error en servidor ${error}`));
