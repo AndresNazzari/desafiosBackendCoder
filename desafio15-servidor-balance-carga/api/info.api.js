@@ -1,3 +1,5 @@
+const os = require('os');
+
 class InfoApi {
     getInfo() {
         return {
@@ -8,6 +10,7 @@ class InfoApi {
             execPath: process.cwd(),
             processId: process.pid,
             carpetaProyect: process.cwd(),
+            numCPUs: os.cpus().length,
         };
     }
 }

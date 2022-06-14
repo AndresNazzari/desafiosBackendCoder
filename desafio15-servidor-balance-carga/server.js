@@ -1,8 +1,7 @@
 const express = require('express');
 require('dotenv').config();
-const config = require('./config/config.js');
-const handlebars = require('express-handlebars');
 const passport = require('passport');
+const handlebars = require('express-handlebars');
 const LocalStrategy = require('passport-local').Strategy;
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
@@ -10,9 +9,14 @@ const bcrypt = require('bcrypt');
 const MongoStore = require('connect-mongo');
 const { Server: IOServer } = require('socket.io');
 const { Server: HttpServer } = require('http');
+const cluster = require('cluster');
+const numCPUs = require('os').cpus().length;
+
+const config = require('./config/config.js');
 const auth = require('./middleware/auth.js');
 const connectDB = require('./config/db.js');
 const User = require('./models/User.js');
+
 const app = express();
 const httpServer = new HttpServer(app);
 const io = new IOServer(httpServer);
@@ -202,7 +206,31 @@ io.on('connection', async (socket) => {
 
 /*============================[Servidor]============================*/
 
-const server = httpServer.listen(config.PORT, () => {
-    console.log(`Servidor http escuchando en el puerto ${server.address().port}`);
-});
-server.on('error', (error) => console.log(`Error en servidor ${error}`));
+//Si se ingresa parametro MODE cluster
+if (config.MODE == 'cluster') {
+    if (cluster.isMaster) {
+        console.log('entro en cluster');
+        console.log(`Master ${process.pid} is running`);
+        //For workers
+        for (let i = 0; i < numCPUs; i++) {
+            cluster.fork();
+        }
+        cluster.on('listening', (worker, address) => {
+            console.log(`Worker ${worker.process.pid} is listening in  ${address.port}`);
+        });
+    } else {
+        const server = httpServer.listen(config.PORT, () => {
+            console.log(`Servidor http escuchando en el puerto ${server.address().port}`);
+        });
+
+        server.on('error', (error) => console.log(`Error en servidor ${error}`));
+    }
+} else {
+    console.log('entro en fork');
+
+    //Si no se, realiza en modo fork
+    const server = httpServer.listen(config.PORT, () => {
+        console.log(`Servidor http escuchando en el puerto ${server.address().port}`);
+    });
+    server.on('error', (error) => console.log(`Error en servidor ${error}`));
+}
