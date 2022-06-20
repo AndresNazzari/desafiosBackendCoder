@@ -176,8 +176,7 @@ app.post('/logout', (req, res) => {
     req.session.destroy();
 });
 
-//Se comenta esta linea de codigo poruqe lo maneja Nginx
-//app.use(express.static(__dirname + '/public'));
+app.use(express.static(__dirname + '/public'));
 
 /*============================[Websokets]============================*/
 io.on('connection', async (socket) => {
