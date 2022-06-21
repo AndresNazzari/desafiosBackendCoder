@@ -1,4 +1,6 @@
 const fs = require('fs');
+const loggerError = require('./config/logger.js').loggerError;
+
 class MessagesAPI {
     constructor(file) {
         this.file = file;
@@ -18,13 +20,10 @@ class MessagesAPI {
             }
             const newMessage = { ...obj, id };
             messages.push(newMessage);
-            await fs.promises.writeFile(
-                this.file,
-                JSON.stringify(messages, null, 2)
-            );
+            await fs.promises.writeFile(this.file, JSON.stringify(messages, null, 2));
             return newMessage;
         } catch (error) {
-            throw new Error(`Error en Save! ${error.message}`);
+            loggerError.error(`Error en Save de Mensajes! ${error.message}`);
         }
     }
 

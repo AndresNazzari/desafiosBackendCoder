@@ -11,6 +11,9 @@ const { Server: IOServer } = require('socket.io');
 const { Server: HttpServer } = require('http');
 const cluster = require('cluster');
 const numCPUs = require('os').cpus().length;
+const compression = require('compression');
+const warnLogger = require('./middleware/loggers.js').warnLogger;
+const defLogger = require('./middleware/loggers.js').defaultLogger;
 
 const config = require('./config/config.js');
 const auth = require('./middleware/auth.js');
@@ -34,7 +37,8 @@ const messagesAPI = new MessagesAPI(messagesFile);
 // si no pongo esto no puede reconocer el req.body
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-
+// Utilizamos compresion gzip para optimizar el tiempo de respuesta
+app.use(compression());
 /*============================[Base de Datos]============================*/
 connectDB();
 
@@ -114,6 +118,9 @@ app.set('view engine', 'hbs');
 app.set('views', './views');
 
 /*============================[Rutas]============================*/
+//ruta para loguear todas las requests
+app.use(defLogger);
+
 app.use('/api/info', require('./routes/api/info.route.js'));
 app.use('/api/randoms', require('./routes/api/randoms.route.js'));
 
@@ -177,6 +184,9 @@ app.post('/logout', (req, res) => {
 });
 
 app.use(express.static(__dirname + '/public'));
+
+//esta ruta loguea todos los intentos de acceso a recursos inexistentes
+app.use(warnLogger);
 
 /*============================[Websokets]============================*/
 io.on('connection', async (socket) => {

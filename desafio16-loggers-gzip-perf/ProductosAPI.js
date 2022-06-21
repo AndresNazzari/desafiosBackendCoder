@@ -1,4 +1,6 @@
 const fs = require('fs');
+const loggerError = require('./config/logger.js').loggerError;
+
 class ProductosAPI {
     constructor(file) {
         this.file = file;
@@ -18,13 +20,10 @@ class ProductosAPI {
             }
             const newProduct = { ...obj, id };
             productos.push(newProduct);
-            await fs.promises.writeFile(
-                this.file,
-                JSON.stringify(productos, null, 2)
-            );
+            await fs.promises.writeFile(this.file, JSON.stringify(productos, null, 2));
             return newProduct;
         } catch (error) {
-            throw new Error(`Error en Save! ${error.message}`);
+            loggerError.error(`Error en Save de Productos! ${error.message}`);
         }
     }
 

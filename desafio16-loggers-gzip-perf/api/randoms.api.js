@@ -15,7 +15,6 @@ class RandomsApi {
                 this.listaOcurrencias[clave.toString()] = 1;
             }
         }
-        console.log(this.listaOcurrencias);
 
         return this.listaOcurrencias;
     }

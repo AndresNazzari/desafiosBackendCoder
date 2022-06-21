@@ -1,0 +1,186 @@
+Statistical profiling result from conclg-v8.log, (730 ticks, 0 unaccounted, 0 excluded).
+
+ [Shared libraries]:
+   ticks  total  nonlib   name
+    492   67.4%          C:\WINDOWS\SYSTEM32\ntdll.dll
+    213   29.2%          C:\Program Files\nodejs\node.exe
+      1    0.1%          C:\WINDOWS\System32\WS2_32.dll
+      1    0.1%          C:\WINDOWS\System32\KERNELBASE.dll
+
+ [JavaScript]:
+   ticks  total  nonlib   name
+      3    0.4%   13.0%  LazyCompile: *wrap D:\GITHUB\desafiosBackendCoder\desafio16-loggers-gzip-perf\node_modules\handlebars\dist\cjs\handlebars\compiler\code-gen.js:101:22
+      1    0.1%    4.3%  RegExp: ^\.|this\b
+      1    0.1%    4.3%  RegExp: ^(?:\{\{(~)?&)
+      1    0.1%    4.3%  LazyCompile: *parse D:\GITHUB\desafiosBackendCoder\desafio16-loggers-gzip-perf\node_modules\handlebars\dist\cjs\handlebars\compiler\parser.js:269:30
+      1    0.1%    4.3%  LazyCompile: *onwrite node:internal/streams/writable:426:17
+      1    0.1%    4.3%  LazyCompile: *generateList D:\GITHUB\desafiosBackendCoder\desafio16-loggers-gzip-perf\node_modules\handlebars\dist\cjs\handlebars\compiler\code-gen.js:143:38
+      1    0.1%    4.3%  LazyCompile: *cpus node:os:133:14
+      1    0.1%    4.3%  LazyCompile: *SourceNode_walk D:\GITHUB\desafiosBackendCoder\desafio16-loggers-gzip-perf\node_modules\source-map\lib\source-node.js:221:53
+      1    0.1%    4.3%  Function: ^validateNumber node:internal/validators:123:24
+      1    0.1%    4.3%  Function: ^session D:\GITHUB\desafiosBackendCoder\desafio16-loggers-gzip-perf\node_modules\express-session\index.js:179:26
+      1    0.1%    4.3%  Function: ^ret._setup D:\GITHUB\desafiosBackendCoder\desafio16-loggers-gzip-perf\node_modules\handlebars\dist\cjs\handlebars\runtime.js:217:25
+      1    0.1%    4.3%  Function: ^preferredEncodings D:\GITHUB\desafiosBackendCoder\desafio16-loggers-gzip-perf\node_modules\negotiator\lib\encoding.js:138:28
+      1    0.1%    4.3%  Function: ^getcookie D:\GITHUB\desafiosBackendCoder\desafio16-loggers-gzip-perf\node_modules\express-session\index.js:529:19
+      1    0.1%    4.3%  Function: ^getInfo D:\GITHUB\desafiosBackendCoder\desafio16-loggers-gzip-perf\api\info.api.js:4:12
+      1    0.1%    4.3%  Function: ^getEnableCallStackForCategory D:\GITHUB\desafiosBackendCoder\desafio16-loggers-gzip-perf\node_modules\log4js\lib\categories.js:203:39
+      1    0.1%    4.3%  Function: ^createNewLookupObject D:\GITHUB\desafiosBackendCoder\desafio16-loggers-gzip-perf\node_modules\handlebars\dist\cjs\handlebars\internal\create-new-lookup-object.js:15:31
+      1    0.1%    4.3%  Function: ^compile D:\GITHUB\desafiosBackendCoder\desafio16-loggers-gzip-perf\node_modules\handlebars\dist\cjs\handlebars\compiler\javascript-compiler.js:73:28
+      1    0.1%    4.3%  Function: ^checkListener node:events:258:23
+      1    0.1%    4.3%  Function: ^braceExpand D:\GITHUB\desafiosBackendCoder\desafio16-loggers-gzip-perf\node_modules\minimatch\minimatch.js:248:22
+      1    0.1%    4.3%  Function: ^<anonymous> node:internal/validators:222:42
+      1    0.1%    4.3%  Function: ^<anonymous> D:\GITHUB\desafiosBackendCoder\desafio16-loggers-gzip-perf\node_modules\express\lib\request.js:467:36
+
+ [C++]:
+   ticks  total  nonlib   name
+
+ [Summary]:
+   ticks  total  nonlib   name
+     23    3.2%  100.0%  JavaScript
+      0    0.0%    0.0%  C++
+      7    1.0%   30.4%  GC
+    707   96.8%          Shared libraries
+
+ [C++ entry points]:
+   ticks    cpp   total   name
+
+ [Bottom up (heavy) profile]:
+  Note: percentage shows a share of a particular caller in the total
+  amount of its parent calls.
+  Callers occupying less than 1.0% are not shown.
+
+   ticks parent  name
+    492   67.4%  C:\WINDOWS\SYSTEM32\ntdll.dll
+      8    1.6%    C:\Program Files\nodejs\node.exe
+      1   12.5%      LazyCompile: ~toRealPath node:internal/modules/cjs/loader:393:20
+      1  100.0%        LazyCompile: ~Module._findPath node:internal/modules/cjs/loader:494:28
+      1  100.0%          LazyCompile: ~resolveMainPath node:internal/modules/run_main:15:25
+      1  100.0%            LazyCompile: ~executeUserEntryPoint node:internal/modules/run_main:70:31
+      1   12.5%      LazyCompile: ~resolve D:\GITHUB\desafiosBackendCoder\desafio16-loggers-gzip-perf\node_modules\express\lib\view.js:146:42
+      1  100.0%        Function: ^lookup D:\GITHUB\desafiosBackendCoder\desafio16-loggers-gzip-perf\node_modules\express\lib\view.js:104:40
+      1  100.0%          Function: ^View D:\GITHUB\desafiosBackendCoder\desafio16-loggers-gzip-perf\node_modules\express\lib\view.js:52:14
+      1  100.0%            Function: ^render D:\GITHUB\desafiosBackendCoder\desafio16-loggers-gzip-perf\node_modules\express\lib\application.js:531:29
+      1   12.5%      LazyCompile: ~processTicksAndRejections node:internal/process/task_queues:68:35
+      1   12.5%      LazyCompile: ~prepareHandshakeDocument D:\GITHUB\desafiosBackendCoder\desafio16-loggers-gzip-perf\node_modules\mongoose\node_modules\mongodb\lib\cmap\connect.js:139:34
+      1  100.0%        LazyCompile: ~performInitialHandshake D:\GITHUB\desafiosBackendCoder\desafio16-loggers-gzip-perf\node_modules\mongoose\node_modules\mongodb\lib\cmap\connect.js:62:33
+      1  100.0%          LazyCompile: ~<anonymous> D:\GITHUB\desafiosBackendCoder\desafio16-loggers-gzip-perf\node_modules\mongoose\node_modules\mongodb\lib\cmap\connect.js:31:63
+      1  100.0%            LazyCompile: ~callback D:\GITHUB\desafiosBackendCoder\desafio16-loggers-gzip-perf\node_modules\mongoose\node_modules\mongodb\lib\cmap\connect.js:254:31
+      1   12.5%      LazyCompile: ~SourceNode D:\GITHUB\desafiosBackendCoder\desafio16-loggers-gzip-perf\node_modules\source-map\lib\source-node.js:35:20
+      1  100.0%        LazyCompile: ~wrap D:\GITHUB\desafiosBackendCoder\desafio16-loggers-gzip-perf\node_modules\handlebars\dist\cjs\handlebars\compiler\code-gen.js:101:22
+      1  100.0%          LazyCompile: ~castChunk D:\GITHUB\desafiosBackendCoder\desafio16-loggers-gzip-perf\node_modules\handlebars\dist\cjs\handlebars\compiler\code-gen.js:52:19
+      1  100.0%            LazyCompile: ~wrap D:\GITHUB\desafiosBackendCoder\desafio16-loggers-gzip-perf\node_modules\handlebars\dist\cjs\handlebars\compiler\code-gen.js:101:22
+      1   12.5%      LazyCompile: *setupHelperArgs D:\GITHUB\desafiosBackendCoder\desafio16-loggers-gzip-perf\node_modules\handlebars\dist\cjs\handlebars\compiler\javascript-compiler.js:1104:44
+      1  100.0%        LazyCompile: *invokeAmbiguous D:\GITHUB\desafiosBackendCoder\desafio16-loggers-gzip-perf\node_modules\handlebars\dist\cjs\handlebars\compiler\javascript-compiler.js:699:44
+      1  100.0%          LazyCompile: *compile D:\GITHUB\desafiosBackendCoder\desafio16-loggers-gzip-perf\node_modules\handlebars\dist\cjs\handlebars\compiler\javascript-compiler.js:73:28
+      1  100.0%            LazyCompile: *<anonymous> D:\GITHUB\desafiosBackendCoder\desafio16-loggers-gzip-perf\node_modules\express-handlebars\dist\express-handlebars.js:227:47
+      1   12.5%      Function: ~<anonymous> D:\GITHUB\desafiosBackendCoder\desafio16-loggers-gzip-perf\node_modules\streamroller\node_modules\debug\src\node.js:1:1
+      1  100.0%        Function: ^Module._compile node:internal/modules/cjs/loader:1053:37
+      1  100.0%          Function: ^Module._extensions..js node:internal/modules/cjs/loader:1108:37
+      1  100.0%            Function: ^Module.load node:internal/modules/cjs/loader:963:33
+      1   12.5%      Function: ~<anonymous> D:\GITHUB\desafiosBackendCoder\desafio16-loggers-gzip-perf\node_modules\connect-mongo\build\main\lib\MongoStore.js:1:1
+      1  100.0%        Function: ^Module._compile node:internal/modules/cjs/loader:1053:37
+      1  100.0%          Function: ^Module._extensions..js node:internal/modules/cjs/loader:1108:37
+      1  100.0%            Function: ^Module.load node:internal/modules/cjs/loader:963:33
+      6    1.2%    LazyCompile: *cpus node:os:133:14
+      6  100.0%      Function: ^getInfo D:\GITHUB\desafiosBackendCoder\desafio16-loggers-gzip-perf\api\info.api.js:4:12
+      6  100.0%        Function: ^<anonymous> D:\GITHUB\desafiosBackendCoder\desafio16-loggers-gzip-perf\routes\api\info.route.js:10:17
+      6  100.0%          Function: ^handle D:\GITHUB\desafiosBackendCoder\desafio16-loggers-gzip-perf\node_modules\express\lib\router\layer.js:86:49
+      6  100.0%            Function: ^next D:\GITHUB\desafiosBackendCoder\desafio16-loggers-gzip-perf\node_modules\express\lib\router\route.js:114:16
+
+    213   29.2%  C:\Program Files\nodejs\node.exe
+    149   70.0%    C:\Program Files\nodejs\node.exe
+     30   20.1%      Function: ^compileFunction node:vm:308:25
+     30  100.0%        Function: ^wrapSafe node:internal/modules/cjs/loader:1011:18
+     30  100.0%          Function: ^Module._compile node:internal/modules/cjs/loader:1053:37
+     29   96.7%            Function: ^Module._extensions..js node:internal/modules/cjs/loader:1108:37
+      1    3.3%            LazyCompile: ~Module._extensions..js node:internal/modules/cjs/loader:1108:37
+     20   13.4%      Function: ^handleWriteReq node:internal/stream_base_commons:45:24
+     20  100.0%        Function: ^writeGeneric node:internal/stream_base_commons:147:22
+     20  100.0%          Function: ^Socket._writeGeneric node:net:797:42
+     20  100.0%            Function: ^Socket._write node:net:834:35
+      7    4.7%      Function: ^stat node:internal/modules/cjs/loader:151:14
+      4   57.1%        Function: ^Module._findPath node:internal/modules/cjs/loader:494:28
+      4  100.0%          Function: ^Module._resolveFilename node:internal/modules/cjs/loader:848:35
+      4  100.0%            Function: ^Module._load node:internal/modules/cjs/loader:757:24
+      3   42.9%        Function: ^tryFile node:internal/modules/cjs/loader:384:17
+      2   66.7%          Function: ^tryExtensions node:internal/modules/cjs/loader:400:23
+      2  100.0%            Function: ^Module._findPath node:internal/modules/cjs/loader:494:28
+      1   33.3%          Function: ^tryPackage node:internal/modules/cjs/loader:338:20
+      1  100.0%            Function: ^Module._findPath node:internal/modules/cjs/loader:494:28
+      7    4.7%      Function: ^realpathSync node:fs:2426:22
+      7  100.0%        Function: ^toRealPath node:internal/modules/cjs/loader:393:20
+      7  100.0%          Function: ^tryFile node:internal/modules/cjs/loader:384:17
+      7  100.0%            Function: ^tryExtensions node:internal/modules/cjs/loader:400:23
+      5    3.4%      LazyCompile: *SourceNode_walk D:\GITHUB\desafiosBackendCoder\desafio16-loggers-gzip-perf\node_modules\source-map\lib\source-node.js:221:53
+      5  100.0%        LazyCompile: *SourceNode_walk D:\GITHUB\desafiosBackendCoder\desafio16-loggers-gzip-perf\node_modules\source-map\lib\source-node.js:221:53
+      5  100.0%          LazyCompile: *SourceNode_walk D:\GITHUB\desafiosBackendCoder\desafio16-loggers-gzip-perf\node_modules\source-map\lib\source-node.js:221:53
+      5  100.0%            LazyCompile: *SourceNode_walk D:\GITHUB\desafiosBackendCoder\desafio16-loggers-gzip-perf\node_modules\source-map\lib\source-node.js:221:53
+      4    2.7%      LazyCompile: ~configSecureContext node:internal/tls/secure-context:120:29
+      4  100.0%        LazyCompile: ~createSecureContext node:_tls_common:99:29
+      4  100.0%          LazyCompile: ~connect node:_tls_wrap:1599:35
+      4  100.0%            LazyCompile: ~makeConnection D:\GITHUB\desafiosBackendCoder\desafio16-loggers-gzip-perf\node_modules\mongoose\node_modules\mongodb\lib\cmap\connect.js:241:24
+      4    2.7%      Function: ^statSync node:fs:1544:18
+      4  100.0%        Function: ^tryStat D:\GITHUB\desafiosBackendCoder\desafio16-loggers-gzip-perf\node_modules\express\lib\view.js:174:17
+      4  100.0%          Function: ^resolve D:\GITHUB\desafiosBackendCoder\desafio16-loggers-gzip-perf\node_modules\express\lib\view.js:146:42
+      4  100.0%            Function: ^lookup D:\GITHUB\desafiosBackendCoder\desafio16-loggers-gzip-perf\node_modules\express\lib\view.js:104:40
+      4    2.7%      Function: ^cpus node:os:133:14
+      3   75.0%        Function: ^getInfo D:\GITHUB\desafiosBackendCoder\desafio16-loggers-gzip-perf\api\info.api.js:4:12
+      3  100.0%          Function: ^<anonymous> D:\GITHUB\desafiosBackendCoder\desafio16-loggers-gzip-perf\routes\api\info.route.js:10:17
+      3  100.0%            Function: ^handle D:\GITHUB\desafiosBackendCoder\desafio16-loggers-gzip-perf\node_modules\express\lib\router\layer.js:86:49
+      1   25.0%        LazyCompile: ~getInfo D:\GITHUB\desafiosBackendCoder\desafio16-loggers-gzip-perf\api\info.api.js:4:12
+      1  100.0%          LazyCompile: ~<anonymous> D:\GITHUB\desafiosBackendCoder\desafio16-loggers-gzip-perf\routes\api\info.route.js:10:17
+      1  100.0%            LazyCompile: ~handle D:\GITHUB\desafiosBackendCoder\desafio16-loggers-gzip-perf\node_modules\express\lib\router\layer.js:86:49
+      3    2.0%      LazyCompile: *compile D:\GITHUB\desafiosBackendCoder\desafio16-loggers-gzip-perf\node_modules\handlebars\dist\cjs\handlebars\compiler\javascript-compiler.js:73:28
+      2   66.7%        Function: ^compileInput D:\GITHUB\desafiosBackendCoder\desafio16-loggers-gzip-perf\node_modules\handlebars\dist\cjs\handlebars\compiler\compiler.js:507:24
+      2  100.0%          Function: ^ret D:\GITHUB\desafiosBackendCoder\desafio16-loggers-gzip-perf\node_modules\handlebars\dist\cjs\handlebars\compiler\compiler.js:515:15
+      2  100.0%            Function: ^ExpressHandlebars._renderTemplate D:\GITHUB\desafiosBackendCoder\desafio16-loggers-gzip-perf\node_modules\express-handlebars\dist\express-handlebars.js:321:60
+      1   33.3%        LazyCompile: *<anonymous> D:\GITHUB\desafiosBackendCoder\desafio16-loggers-gzip-perf\node_modules\express-handlebars\dist\express-handlebars.js:227:47
+      1  100.0%          LazyCompile: *step D:\GITHUB\desafiosBackendCoder\desafio16-loggers-gzip-perf\node_modules\express-handlebars\dist\express-handlebars.js:31:18
+      1  100.0%            Function: ^<anonymous> D:\GITHUB\desafiosBackendCoder\desafio16-loggers-gzip-perf\node_modules\express-handlebars\dist\express-handlebars.js:30:40
+      2    1.3%      LazyCompile: ~pbkdf2Sync node:internal/crypto/pbkdf2:68:20
+      1   50.0%        LazyCompile: ~HI D:\GITHUB\desafiosBackendCoder\desafio16-loggers-gzip-perf\node_modules\mongoose\node_modules\mongodb\lib\cmap\auth\scram.js:227:12
+      1  100.0%          LazyCompile: ~continueScramConversation D:\GITHUB\desafiosBackendCoder\desafio16-loggers-gzip-perf\node_modules\mongoose\node_modules\mongodb\lib\cmap\auth\scram.js:93:35
+      1  100.0%            LazyCompile: ~<anonymous> D:\GITHUB\desafiosBackendCoder\desafio16-loggers-gzip-perf\node_modules\mongoose\node_modules\mongodb\lib\cmap\auth\scram.js:85:80
+      1   50.0%        LazyCompile: ~HI D:\GITHUB\desafiosBackendCoder\desafio16-loggers-gzip-perf\node_modules\mongodb\lib\cmap\auth\scram.js:227:12
+      1  100.0%          LazyCompile: ~continueScramConversation D:\GITHUB\desafiosBackendCoder\desafio16-loggers-gzip-perf\node_modules\mongodb\lib\cmap\auth\scram.js:93:35
+      1  100.0%            LazyCompile: ~<anonymous> D:\GITHUB\desafiosBackendCoder\desafio16-loggers-gzip-perf\node_modules\mongodb\lib\cmap\auth\scram.js:85:80
+      2    1.3%      LazyCompile: ~compileForInternalLoader node:internal/bootstrap/loaders:299:27
+      2  100.0%        Function: ^nativeModuleRequire node:internal/bootstrap/loaders:332:29
+      1   50.0%          Function: ~<anonymous> node:internal/webstreams/adapters:1:1
+      1  100.0%            LazyCompile: ~compileForInternalLoader node:internal/bootstrap/loaders:299:27
+      1   50.0%          Function: ~<anonymous> node:internal/modules/esm/get_format:1:1
+      1  100.0%            LazyCompile: ~compileForInternalLoader node:internal/bootstrap/loaders:299:27
+      2    1.3%      LazyCompile: ~SecureContext node:_tls_common:75:23
+      2  100.0%        LazyCompile: ~createSecureContext node:_tls_common:99:29
+      2  100.0%          LazyCompile: ~connect node:_tls_wrap:1599:35
+      1   50.0%            LazyCompile: ~makeConnection D:\GITHUB\desafiosBackendCoder\desafio16-loggers-gzip-perf\node_modules\mongoose\node_modules\mongodb\lib\cmap\connect.js:241:24
+      1   50.0%            LazyCompile: ~makeConnection D:\GITHUB\desafiosBackendCoder\desafio16-loggers-gzip-perf\node_modules\mongodb\lib\cmap\connect.js:248:24
+      2    1.3%      LazyCompile: *<anonymous> D:\GITHUB\desafiosBackendCoder\desafio16-loggers-gzip-perf\node_modules\source-map\lib\source-node.js:174:29
+      2  100.0%        LazyCompile: *SourceNode_add D:\GITHUB\desafiosBackendCoder\desafio16-loggers-gzip-perf\node_modules\source-map\lib\source-node.js:172:51
+      2  100.0%          Function: ^<anonymous> D:\GITHUB\desafiosBackendCoder\desafio16-loggers-gzip-perf\node_modules\handlebars\dist\cjs\handlebars\compiler\code-gen.js:85:24
+      2  100.0%            Function: ^each D:\GITHUB\desafiosBackendCoder\desafio16-loggers-gzip-perf\node_modules\handlebars\dist\cjs\handlebars\compiler\code-gen.js:91:22
+      2    1.3%      Function: ^readSync node:fs:685:18
+      2  100.0%        Function: ^tryReadSync node:fs:430:21
+      2  100.0%          Function: ^readFileSync node:fs:451:22
+      2  100.0%            Function: ^Module._extensions..js node:internal/modules/cjs/loader:1108:37
+      2    1.3%      Function: ^readFile node:fs:374:18
+      2  100.0%        Function: ^go$readFile D:\GITHUB\desafiosBackendCoder\desafio16-loggers-gzip-perf\node_modules\graceful-fs\graceful-fs.js:117:26
+      2  100.0%          Function: ^readFile D:\GITHUB\desafiosBackendCoder\desafio16-loggers-gzip-perf\node_modules\graceful-fs\graceful-fs.js:111:21
+      1   50.0%            LazyCompile: *<anonymous> node:internal/util:346:24
+      1   50.0%            Function: ^<anonymous> node:internal/util:346:24
+      2    1.3%      Function: ^compression D:\GITHUB\desafiosBackendCoder\desafio16-loggers-gzip-perf\node_modules\compression\index.js:59:31
+      2  100.0%        LazyCompile: *trim_prefix D:\GITHUB\desafiosBackendCoder\desafio16-loggers-gzip-perf\node_modules\express\lib\router\index.js:288:23
+      2  100.0%          LazyCompile: *next D:\GITHUB\desafiosBackendCoder\desafio16-loggers-gzip-perf\node_modules\express\lib\router\index.js:176:16
+      2  100.0%            Function: ^urlencodedParser D:\GITHUB\desafiosBackendCoder\desafio16-loggers-gzip-perf\node_modules\body-parser\lib\types\urlencoded.js:79:36
+      2    1.3%      Function: ^compileForInternalLoader node:internal/bootstrap/loaders:299:27
+      1   50.0%        LazyCompile: ~compileForPublicLoader node:internal/bootstrap/loaders:246:25
+      1  100.0%          Function: ^loadNativeModule node:internal/modules/cjs/helpers:44:26
+      1  100.0%            LazyCompile: ~Module._load node:internal/modules/cjs/loader:757:24
+      1   50.0%        Function: ^nativeModuleRequire node:internal/bootstrap/loaders:332:29
+      1  100.0%          Function: ~<anonymous> node:_http_outgoing:1:1
+      1  100.0%            Function: ^compileForInternalLoader node:internal/bootstrap/loaders:299:27
+      2    1.3%      Function: ^clearIncoming node:_http_server:752:23
+      2  100.0%        Function: ^resOnFinish node:_http_server:791:21
+      2  100.0%          Function: ^emit node:events:475:44
+      2  100.0%            Function: ^onFinish node:_http_outgoing:828:18
+
