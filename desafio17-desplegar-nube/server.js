@@ -16,7 +16,6 @@ const warnLogger = require('./middleware/loggers.js').warnLogger;
 const defLogger = require('./middleware/loggers.js').defaultLogger;
 
 const config = require('./config/config.js');
-const auth = require('./middleware/auth.js');
 const connectDB = require('./config/db.js');
 const User = require('./models/User.js');
 
