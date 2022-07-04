@@ -14,9 +14,9 @@ const numCPUs = require('os').cpus().length;
 const compression = require('compression');
 const warnLoggerMidd = require('./middleware/loggers.js').warnLogger;
 const defLoggerMidd = require('./middleware/loggers.js').defaultLogger;
-const errorLogger = require('./config/logger.js').loggerError;
-const warnLogger = require('./config/logger.js').loggerWarn;
-const defLogger = require('./config/logger.js').loggerDefault;
+
+const loggerWarn = require('./config/logger.js').loggerWarn;
+const loggerDefault = require('./config/logger.js').loggerDefault;
 
 const config = require('./config/config.js');
 const connectDB = require('./config/db.js');
@@ -60,15 +60,17 @@ passport.use(
         const user = await User.findOne({ username });
 
         if (!user) {
-            console.log('Usuario no encontrado');
+            //console.log('Usuario no encontrado');
+            loggerWarn.warn('Usuario no encontrado');
             return done(null, false);
         }
         const isMatch = await bcrypt.compare(password, user.password);
         if (!isMatch) {
-            console.log('Contraseña INCORRECTA');
+            //console.log('Contraseña INCORRECTA');
+            loggerWarn.warn('Contraseña INCORRECTA');
             return done(null, false);
         }
-        console.log('Contrasenia Correcta');
+        loggerDefault.info('usuario encontrado');
 
         return done(null, user);
     })
@@ -189,7 +191,8 @@ app.use(warnLoggerMidd);
 
 /*============================[Websokets]============================*/
 io.on('connection', async (socket) => {
-    console.log('Usuario conectado');
+    //console.log('Usuario conectado');
+    loggerDefault.info('Usuario conectado');
     const productosCargados = { productos: await productosAPI.getAll() };
     productosCargados.productos.length > 0 && socket.emit('productos', productosCargados);
 
@@ -218,18 +221,22 @@ io.on('connection', async (socket) => {
 //Si se ingresa parametro MODE cluster
 if (config.MODE == 'cluster') {
     if (cluster.isMaster) {
-        console.log('entro en cluster');
-        console.log(`Master ${process.pid} is running`);
+        loggerDefault.info(`Cluster mode`);
+        loggerDefault.info(`Master ${process.pid} is running`);
+        // console.log('entro en cluster');
+        // console.log(`Master ${process.pid} is running`);
         //For workers
         for (let i = 0; i < numCPUs; i++) {
             cluster.fork();
         }
         cluster.on('listening', (worker, address) => {
-            console.log(`Worker ${worker.process.pid} is listening in  ${address.port}`);
+            loggerDefault.info(`Worker ${worker.process.pid} is listening in  ${address.port}`);
+            //console.log(`Worker ${worker.process.pid} is listening in  ${address.port}`);
         });
     } else {
         const server = httpServer.listen(config.PORT, () => {
-            console.log(`Servidor http escuchando en el puerto ${server.address().port}`);
+            loggerDefault.info(`Servidor http escuchando en el puerto ${server.address().port}`);
+            //console.log(`Servidor http escuchando en el puerto ${server.address().port}`);
         });
 
         server.on('error', (error) => {
@@ -238,11 +245,13 @@ if (config.MODE == 'cluster') {
         });
     }
 } else {
-    console.log('entro en modo fork');
+    loggerDefault.info(`Fork mode`);
+    //console.log('entro en modo fork');
 
     //Si no se, realiza en modo fork
     const server = httpServer.listen(config.PORT, () => {
-        console.log(`Servidor http escuchando en el puerto ${server.address().port}`);
+        loggerDefault.info(`Servidor http escuchando en el puerto ${server.address().port}`);
+        //console.log(`Servidor http escuchando en el puerto ${server.address().port}`);
     });
     server.on('error', (error) => {
         loggerError.error(`Error en servidor! ${error}`);
