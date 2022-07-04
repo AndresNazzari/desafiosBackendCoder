@@ -2014,3 +2014,18 @@
 [2022-06-27T12:02:55.543] [WARN] warnFile - Recurso Inexistente: ruta /info y método GET no definida
 [2022-06-27T20:39:50.629] [WARN] warnFile - Recurso Inexistente: ruta /favicon.ico y método GET no definida
 [2022-07-04T17:31:37.885] [WARN] warnFile - Recurso Inexistente: ruta /favicon.ico y método GET no definida
+[2022-07-04T20:19:47.594] [WARN] warnFile - Recurso Inexistente: ruta /favicon.ico y método GET no definida
+[2022-07-04T20:40:50.503] [WARN] warnFile - Recurso Inexistente: ruta /favicon.ico y método GET no definida
+[2022-07-04T21:01:37.238] [WARN] warnFile - transporter.sendMail is not a function
+[2022-07-04T21:03:10.626] [WARN] warnFile - transporter.sendMail is not a function
+[2022-07-04T21:05:06.417] [WARN] warnFile - transporter.sendMail is not a function
+[2022-07-04T21:05:28.815] [WARN] warnFile - transporter.sendMail is not a function
+[2022-07-04T21:06:26.610] [WARN] warnFile - transporter.sendMail is not a function
+[2022-07-04T21:09:21.455] [WARN] warnFile - createTransport is not defined
+[2022-07-04T21:09:47.013] [WARN] warnFile - createTransport is not defined
+[2022-07-04T21:10:43.104] [WARN] warnFile - createTransport is not defined
+[2022-07-04T21:11:21.030] [WARN] warnFile - createTransport is not defined
+[2022-07-04T21:11:21.362] [WARN] warnFile - Recurso Inexistente: ruta /images/icons/gear.png y método GET no definida
+[2022-07-04T21:12:06.556] [WARN] warnFile - createTransport is not defined
+[2022-07-04T21:18:31.278] [WARN] warnFile - transporter.sendMail is not a function
+[2022-07-04T21:24:35.768] [WARN] warnFile - welcomeMail is not a function

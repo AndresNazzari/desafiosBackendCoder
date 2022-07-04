@@ -14,6 +14,7 @@ const numCPUs = require('os').cpus().length;
 const compression = require('compression');
 const warnLoggerMidd = require('./middleware/loggers.js').warnLogger;
 const defLoggerMidd = require('./middleware/loggers.js').defaultLogger;
+const welcomeMail = require('./config/nodemailer.js').welcomeMail;
 
 const loggerWarn = require('./config/logger.js').loggerWarn;
 const loggerDefault = require('./config/logger.js').loggerDefault;
@@ -56,8 +57,9 @@ function isAuth(req, res, next) {
 /*----------- Passport -----------*/
 passport.use(
     new LocalStrategy(async (username, password, done) => {
-        //Logica para validar si un usuario existe
-        const user = await User.findOne({ username });
+        console.log(username, password);
+
+        const user = await User.findOne({ email: username });
 
         if (!user) {
             //console.log('Usuario no encontrado');
@@ -77,10 +79,10 @@ passport.use(
 );
 
 passport.serializeUser((user, done) => {
-    done(null, user.username);
+    done(null, user.email);
 });
-passport.deserializeUser(async (username, done) => {
-    const user = await User.findOne({ username });
+passport.deserializeUser(async (email, done) => {
+    const user = await User.findOne({ email });
     done(null, user);
 });
 
@@ -129,7 +131,7 @@ app.use('/api/info', require('./routes/api/info.route.js'));
 app.use('/api/randoms', require('./routes/api/randoms.route.js'));
 
 app.get('/productos', isAuth, (req, res) => {
-    res.render('productos', { username: req.session.passport.user });
+    res.render('productos', { email: req.session.passport.user });
 });
 
 app.get('/login', (req, res) => {
@@ -157,25 +159,36 @@ app.post(
 );
 
 app.post('/register', async (req, res) => {
-    const { username, password } = req.body;
+    const { nombre, direccion, edad, telefono, avatar, email, password } = req.body;
+
     try {
-        let user = await User.findOne({ username });
+        let user = await User.findOne({ email });
         if (user) {
             res.redirect('/register-error');
         } else {
             user = new User({
-                username,
+                nombre,
+                direccion,
+                edad,
+                telefono,
+                avatar,
+                email,
                 password,
             });
+
             //Encrypt password
             const salt = await bcrypt.genSalt(10);
             user.password = await bcrypt.hash(password, salt);
             await user.save();
+
+            //Enviar email de bienvenida
+            await welcomeMail(user);
+
             res.redirect('/productos');
         }
     } catch (error) {
-        console.error(error.message);
-        res.status(500).send('Server Error');
+        loggerWarn.warn(error.message);
+        return res.status(500).send(error.message);
     }
 });
 
