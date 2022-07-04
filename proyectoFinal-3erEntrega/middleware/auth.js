@@ -1,6 +1,4 @@
 function auth(req, res, next) {
-    //administrador puede ser un jwt que viene en el header
-
     if (req.session?.userName) {
         console.log('Ruta autorizada');
         next();

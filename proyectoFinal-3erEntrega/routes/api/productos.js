@@ -9,9 +9,7 @@ const productosAPI = new ProductosAPI();
 //@access   Public
 router.get('/', (req, res) => {
     const result = { productos: productosAPI.getAll() };
-    result.productos.length > 0
-        ? res.status(200).json(result)
-        : res.status(400).json({ msg: 'No hay productos' });
+    result.productos.length > 0 ? res.status(200).json(result) : res.status(400).json({ msg: 'No hay productos' });
 });
 
 //@route    GET /productos/:id
@@ -20,9 +18,7 @@ router.get('/', (req, res) => {
 router.get('/:id', (req, res) => {
     const id = req.params.id;
     const result = productosAPI.getById(id);
-    result
-        ? res.status(200).json(result)
-        : res.status(400).json({ error: 'producto no encontrado' });
+    result ? res.status(200).json(result) : res.status(400).json({ error: 'producto no encontrado' });
 });
 
 //@route    GET /api/productos/random
@@ -56,9 +52,7 @@ router.delete('/:id', (req, res) => {
     //resolver
     const id = req.params.id;
     const result = productosAPI.deleteById(id);
-    result
-        ? res.status(200).json(result)
-        : res.status(400).json({ error: 'producto no encontrado' });
+    result ? res.status(200).json(result) : res.status(400).json({ error: 'producto no encontrado' });
 });
 
 module.exports = router;

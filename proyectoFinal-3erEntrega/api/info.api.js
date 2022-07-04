@@ -2,7 +2,6 @@ const os = require('os');
 
 class InfoApi {
     getInfo() {
-        //console.log('pruieba prueba');
         return {
             argEntrada: process.argv,
             plataforma: process.platform,

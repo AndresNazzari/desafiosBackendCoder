@@ -12,8 +12,11 @@ const { Server: HttpServer } = require('http');
 const cluster = require('cluster');
 const numCPUs = require('os').cpus().length;
 const compression = require('compression');
-const warnLogger = require('./middleware/loggers.js').warnLogger;
-const defLogger = require('./middleware/loggers.js').defaultLogger;
+const warnLoggerMidd = require('./middleware/loggers.js').warnLogger;
+const defLoggerMidd = require('./middleware/loggers.js').defaultLogger;
+const errorLogger = require('./config/logger.js').loggerError;
+const warnLogger = require('./config/logger.js').loggerWarn;
+const defLogger = require('./config/logger.js').loggerDefault;
 
 const config = require('./config/config.js');
 const connectDB = require('./config/db.js');
@@ -62,7 +65,7 @@ passport.use(
         }
         const isMatch = await bcrypt.compare(password, user.password);
         if (!isMatch) {
-            console.log('Contrasenia INCORRECTA');
+            console.log('Contraseña INCORRECTA');
             return done(null, false);
         }
         console.log('Contrasenia Correcta');
@@ -118,7 +121,7 @@ app.set('views', './views');
 
 /*============================[Rutas]============================*/
 //ruta para loguear todas las requests
-app.use(defLogger);
+app.use(defLoggerMidd);
 
 app.use('/api/info', require('./routes/api/info.route.js'));
 app.use('/api/randoms', require('./routes/api/randoms.route.js'));
@@ -155,7 +158,6 @@ app.post('/register', async (req, res) => {
     const { username, password } = req.body;
     try {
         let user = await User.findOne({ username });
-
         if (user) {
             res.redirect('/register-error');
         } else {
@@ -163,9 +165,7 @@ app.post('/register', async (req, res) => {
                 username,
                 password,
             });
-
             //Encrypt password
-
             const salt = await bcrypt.genSalt(10);
             user.password = await bcrypt.hash(password, salt);
             await user.save();
@@ -184,8 +184,8 @@ app.post('/logout', (req, res) => {
 
 app.use(express.static(__dirname + '/public'));
 
-//esta ruta loguea todos los intentos de acceso a recursos inexistentes
-app.use(warnLogger);
+//esta ruta loguea todos los intentos de acceso a recursos inexistentes, por eso esta al final
+app.use(warnLoggerMidd);
 
 /*============================[Websokets]============================*/
 io.on('connection', async (socket) => {
@@ -232,14 +232,20 @@ if (config.MODE == 'cluster') {
             console.log(`Servidor http escuchando en el puerto ${server.address().port}`);
         });
 
-        server.on('error', (error) => console.log(`Error en servidor ${error}`));
+        server.on('error', (error) => {
+            loggerError.error(`Error en servidor! ${error}`);
+            //console.log(`Error en servidor ${error}`);
+        });
     }
 } else {
-    console.log('entro en fork');
+    console.log('entro en modo fork');
 
     //Si no se, realiza en modo fork
     const server = httpServer.listen(config.PORT, () => {
         console.log(`Servidor http escuchando en el puerto ${server.address().port}`);
     });
-    server.on('error', (error) => console.log(`Error en servidor ${error}`));
+    server.on('error', (error) => {
+        loggerError.error(`Error en servidor! ${error}`);
+        //console.log(`Error en servidor ${error}`);
+    });
 }
