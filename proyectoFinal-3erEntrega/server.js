@@ -158,7 +158,7 @@ app.get('/register-error', (req, res) => {
 app.post(
     '/login',
     passport.authenticate('local', {
-        successRedirect: '/productos',
+        successRedirect: '/api/productos',
         failureRedirect: '/login-error',
     })
 );

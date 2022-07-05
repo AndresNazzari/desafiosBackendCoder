@@ -29,22 +29,22 @@
         <h1>{{msg}}</h1>
 
         {{#each productos}}
-            <form action='' method='post'>
-                <tr>
-                    <th scope='row'>{{id}}</th>
-                    <td>{{title}}</td>
-                    <td>{{price}}</td>
-                    <td><img src='{{thumbnail}}' alt='' style='height:50px' /> </td>
-                    <td>
+            <tr>
+                <th scope='row'>{{id}}</th>
+                <td>{{title}}</td>
+                <td>{{price}}</td>
+                <td><img src='{{thumbnail}}' alt='' style='height:50px' /> </td>
+                <td>
+                    <form action='' method='post'>
                         <input type='submit' name={{id}} value='Agregar al carrito' />
-                    </td>
-                </tr>
-            </form>
+                    </form>
+                </td>
+            </tr>
         {{/each}}
     </tbody>
 </table>
 
-<form action='./finalizar' method='post'>
+<form action='/api/productos/finalizar' method='post'>
     <input type='submit' name='finalizarCompra' value='Finalizar Compra' />
 </form>
 

@@ -4,7 +4,7 @@ const Cart = require('../../models/Cart.model.js');
 const User = require('../../models/User.js');
 const Product = require('../../models/Product.model.js');
 const sendEMail = require('../../config/nodemailer.js').sendEMail;
-
+const sendWA = require('../../middleware/twilio.js').sendWA;
 const ProductosAPI = require('../../api/productos.api');
 const productosAPI = new ProductosAPI();
 
@@ -29,17 +29,18 @@ router.post('/', async (req, res) => {
         const newCart = new Cart({ email: req.session.passport.user, items: [item] });
         await newCart.save();
     }
-    res.redirect('./');
+    res.redirect('/api/productos');
 });
 
 router.post('/finalizar', async (req, res) => {
     console.log('Finalizar');
     try {
         const cart = await Cart.findOne({ email: req.session.passport.user });
-
+        const user = await User.findOne({ email: req.session.passport.user });
         await sendEMail(req.session.passport.user, false, cart);
+        await sendWA(user, cart);
         await Cart.deleteOne({ email: req.session.passport.user });
-        res.redirect('./');
+        res.redirect('/api/productos');
     } catch (err) {
         console.log(err);
     }

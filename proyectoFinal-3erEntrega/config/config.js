@@ -9,4 +9,7 @@ module.exports = {
     FROM_EMAIL: process.env.FROM_EMAIL,
     TO_EMAIL: process.env.TO_EMAIL,
     PASS_EMAIL: process.env.PASS_EMAIL,
+    TWILIO_SID: process.env.TWILIO_SID,
+    TWILIO_TOKEN: process.env.TWILIO_TOKEN,
+    TWILIO_PHONE: process.env.TWILIO_PHONE,
 };
