@@ -16,7 +16,7 @@ const compression = require('compression');
 const warnLoggerMidd = require('./middleware/loggers.js').warnLogger;
 const defLoggerMidd = require('./middleware/loggers.js').defaultLogger;
 const uploadAvatar = require('./middleware/multer.js');
-const welcomeMail = require('./config/nodemailer.js').welcomeMail;
+const sendEMail = require('./config/nodemailer.js').sendEMail;
 const loggerWarn = require('./config/logger.js').loggerWarn;
 const loggerDefault = require('./config/logger.js').loggerDefault;
 const config = require('./config/config.js');
@@ -28,13 +28,12 @@ const httpServer = new HttpServer(app);
 const io = new IOServer(httpServer);
 
 const file = process.cwd() + '/productos.txt';
-const ProductosAPI = require('./ProductosAPI');
-const productosAPI = new ProductosAPI(file);
 
 const messagesFile = process.cwd() + '/messages.txt';
 const MessagesAPI = require('./MessagesAPI');
 const { Passport } = require('passport');
 const messagesAPI = new MessagesAPI(messagesFile);
+const ProdcutosAPI = require('./api/productos.api.js');
 
 // Config para que express reconozca el body de una solicitud post
 // si no pongo esto no puede reconocer el req.body
@@ -119,6 +118,10 @@ app.engine(
         defaultLayout: 'index.hbs',
         layoutDir: __dirname + '/views/layouts',
         partialDir: __dirname + '/views/partials',
+        runtimeOptions: {
+            allowProtoPropertiesByDefault: true,
+            allowProtoMethodsByDefault: true,
+        },
     })
 );
 app.set('view engine', 'hbs');
@@ -130,6 +133,7 @@ app.use(defLoggerMidd);
 
 app.use('/api/info', require('./routes/api/info.route.js'));
 app.use('/api/randoms', require('./routes/api/randoms.route.js'));
+app.use('/api/productos', require('./routes/api/productos.route.js'));
 
 app.get('/productos', isAuth, (req, res) => {
     res.render('productos', { email: req.session.passport.user });
@@ -182,7 +186,7 @@ app.post('/register', uploadAvatar, async (req, res) => {
             await user.save();
 
             //Enviar email de bienvenida
-            await welcomeMail(user);
+            await sendEMail(user, true);
 
             res.redirect('/productos');
         }
@@ -206,19 +210,19 @@ app.use(warnLoggerMidd);
 io.on('connection', async (socket) => {
     //console.log('Usuario conectado');
     loggerDefault.info('Usuario conectado');
-    const productosCargados = { productos: await productosAPI.getAll() };
-    productosCargados.productos.length > 0 && socket.emit('productos', productosCargados);
+    // const productosCargados = { productos: await productosAPI.getAll() };
+    // productosCargados.productos.length > 0 && socket.emit('productos', productosCargados);
 
     const messagesCargados = { messages: await messagesAPI.getAll() };
     messagesCargados.messages.length > 0 && socket.emit('messages', messagesCargados);
 
-    socket.on('addItem', async (data) => {
-        //grabar item en archivo
-        const a = await productosAPI.save(data);
-        //hacer io.sockets.emit con todos los productos
-        const resultado = { productos: await productosAPI.getAll() };
-        io.sockets.emit('productos', resultado);
-    });
+    // socket.on('addItem', async (data) => {
+    //     //grabar item en archivo
+    //     const a = await productosAPI.save(data);
+    //     //hacer io.sockets.emit con todos los productos
+    //     const resultado = { productos: await productosAPI.getAll() };
+    //     io.sockets.emit('productos', resultado);
+    // });
 
     socket.on('newMessage', async (data) => {
         //grabar item en archivo

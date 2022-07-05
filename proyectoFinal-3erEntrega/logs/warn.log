@@ -2044,3 +2044,37 @@
 [2022-07-05T13:43:21.916] [WARN] warnFile - user validation failed: avatar: Path `avatar` is required.
 [2022-07-05T13:46:11.190] [WARN] warnFile - user validation failed: avatar: Path `avatar` is required.
 [2022-07-05T13:47:14.706] [WARN] warnFile - user validation failed: avatar: Path `avatar` is required.
+[2022-07-05T14:20:58.405] [WARN] warnFile - Usuario no encontrado
+[2022-07-05T14:31:12.939] [WARN] warnFile - Recurso Inexistente: ruta /api/... y método GET no definida
+[2022-07-05T14:32:16.189] [WARN] warnFile - Recurso Inexistente: ruta /api/... y método GET no definida
+[2022-07-05T14:34:18.308] [WARN] warnFile - Recurso Inexistente: ruta /api/... y método GET no definida
+[2022-07-05T14:34:45.554] [WARN] warnFile - Recurso Inexistente: ruta /api/... y método GET no definida
+[2022-07-05T14:35:02.979] [WARN] warnFile - Recurso Inexistente: ruta /api/... y método GET no definida
+[2022-07-05T14:51:41.321] [WARN] warnFile - Recurso Inexistente: ruta /api/api/productos y método POST no definida
+[2022-07-05T14:51:49.253] [WARN] warnFile - Recurso Inexistente: ruta /api/api/productos y método POST no definida
+[2022-07-05T14:51:51.845] [WARN] warnFile - Recurso Inexistente: ruta /api/api/productos y método POST no definida
+[2022-07-05T14:52:01.214] [WARN] warnFile - Recurso Inexistente: ruta /api/api/productos y método POST no definida
+[2022-07-05T14:52:13.878] [WARN] warnFile - Recurso Inexistente: ruta /api/ y método POST no definida
+[2022-07-05T14:52:26.576] [WARN] warnFile - Recurso Inexistente: ruta /api/ y método POST no definida
+[2022-07-05T14:53:19.782] [WARN] warnFile - Recurso Inexistente: ruta /api/ y método POST no definida
+[2022-07-05T14:53:26.246] [WARN] warnFile - Recurso Inexistente: ruta /api/ y método POST no definida
+[2022-07-05T14:53:28.640] [WARN] warnFile - Recurso Inexistente: ruta /api/ y método POST no definida
+[2022-07-05T14:53:38.446] [WARN] warnFile - Recurso Inexistente: ruta /favicon.ico y método GET no definida
+[2022-07-05T14:53:47.600] [WARN] warnFile - Recurso Inexistente: ruta /favicon.ico y método GET no definida
+[2022-07-05T14:54:08.148] [WARN] warnFile - Recurso Inexistente: ruta /favicon.ico y método GET no definida
+[2022-07-05T14:54:08.565] [WARN] warnFile - Recurso Inexistente: ruta /api/api/productos y método POST no definida
+[2022-07-05T14:54:19.062] [WARN] warnFile - Recurso Inexistente: ruta /api/api/productos y método POST no definida
+[2022-07-05T14:54:23.930] [WARN] warnFile - Recurso Inexistente: ruta /favicon.ico y método GET no definida
+[2022-07-05T14:55:22.612] [WARN] warnFile - Recurso Inexistente: ruta /favicon.ico y método GET no definida
+[2022-07-05T14:55:25.849] [WARN] warnFile - Recurso Inexistente: ruta /api/api/productos y método GET no definida
+[2022-07-05T15:04:02.607] [WARN] warnFile - Recurso Inexistente: ruta /favicon.ico y método GET no definida
+[2022-07-05T15:04:40.024] [WARN] warnFile - Recurso Inexistente: ruta /favicon.ico y método GET no definida
+[2022-07-05T15:24:49.082] [WARN] warnFile - Recurso Inexistente: ruta /api/finalizar y método POST no definida
+[2022-07-05T15:25:34.180] [WARN] warnFile - Recurso Inexistente: ruta /api/productos/productos y método GET no definida
+[2022-07-05T15:25:47.178] [WARN] warnFile - Recurso Inexistente: ruta /api/productos/productos y método GET no definida
+[2022-07-05T15:25:51.341] [WARN] warnFile - Recurso Inexistente: ruta /favicon.ico y método GET no definida
+[2022-07-05T15:26:05.157] [WARN] warnFile - Recurso Inexistente: ruta /api/productos/productos y método GET no definida
+[2022-07-05T15:26:19.944] [WARN] warnFile - Recurso Inexistente: ruta /favicon.ico y método GET no definida
+[2022-07-05T15:26:26.691] [WARN] warnFile - Recurso Inexistente: ruta /api/productos/productos/finalizar y método POST no definida
+[2022-07-05T15:26:53.616] [WARN] warnFile - Recurso Inexistente: ruta /favicon.ico y método GET no definida
+[2022-07-05T15:27:10.781] [WARN] warnFile - Recurso Inexistente: ruta /favicon.ico y método GET no definida
