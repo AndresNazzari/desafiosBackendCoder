@@ -7,7 +7,6 @@ const UserSchema = new mongoose.Schema({
     direccion: { type: String, required: true },
     edad: { type: Number, required: true },
     telefono: { type: String, required: true },
-    avatar: { type: String, required: true },
     nombre: { type: String, required: true },
     email: {
         type: String,

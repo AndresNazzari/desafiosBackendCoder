@@ -12,13 +12,13 @@ const { Server: HttpServer } = require('http');
 const cluster = require('cluster');
 const numCPUs = require('os').cpus().length;
 const compression = require('compression');
+
 const warnLoggerMidd = require('./middleware/loggers.js').warnLogger;
 const defLoggerMidd = require('./middleware/loggers.js').defaultLogger;
+const uploadAvatar = require('./middleware/multer.js');
 const welcomeMail = require('./config/nodemailer.js').welcomeMail;
-
 const loggerWarn = require('./config/logger.js').loggerWarn;
 const loggerDefault = require('./config/logger.js').loggerDefault;
-
 const config = require('./config/config.js');
 const connectDB = require('./config/db.js');
 const User = require('./models/User.js');
@@ -40,8 +40,10 @@ const messagesAPI = new MessagesAPI(messagesFile);
 // si no pongo esto no puede reconocer el req.body
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
 // Utilizamos compresion gzip para optimizar el tiempo de respuesta
 app.use(compression());
+
 /*============================[Base de Datos]============================*/
 connectDB();
 
@@ -54,11 +56,10 @@ function isAuth(req, res, next) {
         res.redirect('/login');
     }
 }
+
 /*----------- Passport -----------*/
 passport.use(
     new LocalStrategy(async (username, password, done) => {
-        console.log(username, password);
-
         const user = await User.findOne({ email: username });
 
         if (!user) {
@@ -158,8 +159,8 @@ app.post(
     })
 );
 
-app.post('/register', async (req, res) => {
-    const { nombre, direccion, edad, telefono, avatar, email, password } = req.body;
+app.post('/register', uploadAvatar, async (req, res) => {
+    const { nombre, direccion, edad, telefono, email, password } = req.body;
 
     try {
         let user = await User.findOne({ email });
@@ -171,7 +172,6 @@ app.post('/register', async (req, res) => {
                 direccion,
                 edad,
                 telefono,
-                avatar,
                 email,
                 password,
             });

@@ -2029,3 +2029,18 @@
 [2022-07-04T21:12:06.556] [WARN] warnFile - createTransport is not defined
 [2022-07-04T21:18:31.278] [WARN] warnFile - transporter.sendMail is not a function
 [2022-07-04T21:24:35.768] [WARN] warnFile - welcomeMail is not a function
+[2022-07-05T10:02:51.788] [WARN] warnFile - Recurso Inexistente: ruta /favicon.ico y método GET no definida
+[2022-07-05T10:17:47.158] [WARN] warnFile - nodemailer is not defined
+[2022-07-05T13:28:57.981] [WARN] warnFile - data and salt arguments required
+[2022-07-05T13:29:52.502] [WARN] warnFile - user validation failed: avatar: Path `avatar` is required.
+[2022-07-05T13:31:10.506] [WARN] warnFile - user validation failed: avatar: Path `avatar` is required.
+[2022-07-05T13:33:02.106] [WARN] warnFile - user validation failed: avatar: Path `avatar` is required.
+[2022-07-05T13:38:23.561] [WARN] warnFile - user validation failed: avatar: Path `avatar` is required.
+[2022-07-05T13:39:57.948] [WARN] warnFile - user validation failed: avatar: Path `avatar` is required.
+[2022-07-05T13:40:28.176] [WARN] warnFile - user validation failed: avatar: Path `avatar` is required.
+[2022-07-05T13:40:36.770] [WARN] warnFile - user validation failed: avatar: Path `avatar` is required.
+[2022-07-05T13:41:11.937] [WARN] warnFile - data and salt arguments required
+[2022-07-05T13:41:39.627] [WARN] warnFile - data and salt arguments required
+[2022-07-05T13:43:21.916] [WARN] warnFile - user validation failed: avatar: Path `avatar` is required.
+[2022-07-05T13:46:11.190] [WARN] warnFile - user validation failed: avatar: Path `avatar` is required.
+[2022-07-05T13:47:14.706] [WARN] warnFile - user validation failed: avatar: Path `avatar` is required.

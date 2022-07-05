@@ -1,8 +1,9 @@
 const config = require('./config.js');
-const { createTransport } = require('nodemailer');
+const nodemailer = require('nodemailer');
+const loggerDefault = require('./logger.js').loggerDefault;
 
 const welcomeMail = async (user) => {
-    const transporter = createTransport({
+    const transporter = nodemailer.createTransport({
         // host: 'smtp.ethereal.email',
         service: 'gmail',
         port: 587,
@@ -11,8 +12,8 @@ const welcomeMail = async (user) => {
             pass: config.PASS_EMAIL,
         },
     });
-    const TEST_EMAIL = 'arthur.cronin41@ethereal.email';
-    const mailList = [config.TO_EMAIL, user.email, TEST_EMAIL];
+
+    const mailList = [config.TO_EMAIL, user.email];
     mailList.forEach(async (mail) => {
         const mailOptions = {
             from: 'Servidor Node.js',
@@ -21,7 +22,8 @@ const welcomeMail = async (user) => {
             html: `<h1 style="color: blue;">Nuevo usuario registrado <span style="color: green;"> ${user}</span></h1>`,
         };
 
-        await transporter.sendMail(mailOptions);
+        const info = await transporter.sendMail(mailOptions);
+        loggerDefault.info(`Message sent: ${info.messageId} to ${mail}`);
     });
 };
 
