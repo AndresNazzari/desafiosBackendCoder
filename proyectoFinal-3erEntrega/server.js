@@ -1,8 +1,9 @@
 const express = require('express');
 require('dotenv').config();
-const passport = require('passport');
+
+const passport = require('./middleware/passport.middleware');
 const handlebars = require('express-handlebars');
-const LocalStrategy = require('passport-local').Strategy;
+
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const bcrypt = require('bcrypt');
@@ -15,25 +16,16 @@ const compression = require('compression');
 
 const warnLoggerMidd = require('./middleware/loggers.js').warnLogger;
 const defLoggerMidd = require('./middleware/loggers.js').defaultLogger;
-const uploadAvatar = require('./middleware/multer.js');
-const sendEMail = require('./config/nodemailer.js').sendEMail;
-const loggerWarn = require('./config/logger.js').loggerWarn;
+
 const loggerDefault = require('./config/logger.js').loggerDefault;
 const config = require('./config/config.js');
 const connectDB = require('./config/db.js');
-const User = require('./models/User.js');
 
 const app = express();
 const httpServer = new HttpServer(app);
 const io = new IOServer(httpServer);
 
 const file = process.cwd() + '/productos.txt';
-
-const messagesFile = process.cwd() + '/messages.txt';
-const MessagesAPI = require('./MessagesAPI');
-const { Passport } = require('passport');
-const messagesAPI = new MessagesAPI(messagesFile);
-const ProdcutosAPI = require('./api/productos.api.js');
 
 // Config para que express reconozca el body de una solicitud post
 // si no pongo esto no puede reconocer el req.body
@@ -47,44 +39,6 @@ app.use(compression());
 connectDB();
 
 /*============================[Middlewares]============================*/
-/* functions */
-function isAuth(req, res, next) {
-    if (req.isAuthenticated()) {
-        next();
-    } else {
-        res.redirect('/login');
-    }
-}
-
-/*----------- Passport -----------*/
-passport.use(
-    new LocalStrategy(async (username, password, done) => {
-        const user = await User.findOne({ email: username });
-
-        if (!user) {
-            //console.log('Usuario no encontrado');
-            loggerWarn.warn('Usuario no encontrado');
-            return done(null, false);
-        }
-        const isMatch = await bcrypt.compare(password, user.password);
-        if (!isMatch) {
-            //console.log('Contraseña INCORRECTA');
-            loggerWarn.warn('Contraseña INCORRECTA');
-            return done(null, false);
-        }
-        loggerDefault.info('usuario encontrado');
-
-        return done(null, user);
-    })
-);
-
-passport.serializeUser((user, done) => {
-    done(null, user.email);
-});
-passport.deserializeUser(async (email, done) => {
-    const user = await User.findOne({ email });
-    done(null, user);
-});
 
 /*----------- Session -----------*/
 //Config de cookies y session pára mongo atlas
@@ -107,6 +61,8 @@ app.use(
         maxAge: null, //el atributo maxAge de cookie ( esta vez sí en milisegundos) y además utilizando el valor rolling de sesiones en true, gracias a rolling cada vez que se realiza una interacción del usuario al servidor va a renovar el tiempo de expiración de la cookie.
     })
 );
+
+/*----------- Passport -----------*/
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -131,147 +87,72 @@ app.set('views', './views');
 //ruta para loguear todas las requests
 app.use(defLoggerMidd);
 
-app.use('/api/info', require('./routes/api/info.route.js'));
-app.use('/api/randoms', require('./routes/api/randoms.route.js'));
-app.use('/api/productos', require('./routes/api/productos.route.js'));
+app.use('/', require('./routes/web/index.js'));
+app.use('/api', require('./routes/api/index.js'));
 
-app.get('/productos', isAuth, (req, res) => {
-    res.render('productos', { email: req.session.passport.user });
-});
-
-app.get('/login', (req, res) => {
-    res.render('login');
-});
-
-app.get('/login-error', (req, res) => {
-    res.render('login-error');
-});
-
-app.get('/register', (req, res) => {
-    res.render('register');
-});
-
-app.get('/register-error', (req, res) => {
-    res.render('register-error');
-});
-
-app.post(
-    '/login',
-    passport.authenticate('local', {
-        successRedirect: '/api/productos',
-        failureRedirect: '/login-error',
-    })
-);
-
-app.post('/register', uploadAvatar, async (req, res) => {
-    const { nombre, direccion, edad, telefono, email, password } = req.body;
-
-    try {
-        let user = await User.findOne({ email });
-        if (user) {
-            res.redirect('/register-error');
-        } else {
-            user = new User({
-                nombre,
-                direccion,
-                edad,
-                telefono,
-                email,
-                password,
-            });
-
-            //Encrypt password
-            const salt = await bcrypt.genSalt(10);
-            user.password = await bcrypt.hash(password, salt);
-            await user.save();
-
-            //Enviar email de bienvenida
-            await sendEMail(user, true);
-
-            res.redirect('/productos');
-        }
-    } catch (error) {
-        loggerWarn.warn(error.message);
-        return res.status(500).send(error.message);
-    }
-});
-
-app.post('/logout', (req, res) => {
-    res.render('logout', { userName: req.session.userName });
-    req.session.destroy();
-});
-
-app.use(express.static(__dirname + '/public'));
+//app.use(express.static(__dirname + '/public'));
 
 //esta ruta loguea todos los intentos de acceso a recursos inexistentes, por eso esta al final
 app.use(warnLoggerMidd);
 
 /*============================[Websokets]============================*/
-io.on('connection', async (socket) => {
-    //console.log('Usuario conectado');
-    loggerDefault.info('Usuario conectado');
-    // const productosCargados = { productos: await productosAPI.getAll() };
-    // productosCargados.productos.length > 0 && socket.emit('productos', productosCargados);
+// io.on('connection', async (socket) => {
+//console.log('Usuario conectado');
+// loggerDefault.info('Usuario conectado');
+// const productosCargados = { productos: await productosAPI.getAll() };
+// productosCargados.productos.length > 0 && socket.emit('productos', productosCargados);
 
-    const messagesCargados = { messages: await messagesAPI.getAll() };
-    messagesCargados.messages.length > 0 && socket.emit('messages', messagesCargados);
+// const messagesCargados = { messages: await messagesAPI.getAll() };
+// messagesCargados.messages.length > 0 && socket.emit('messages', messagesCargados);
 
-    // socket.on('addItem', async (data) => {
-    //     //grabar item en archivo
-    //     const a = await productosAPI.save(data);
-    //     //hacer io.sockets.emit con todos los productos
-    //     const resultado = { productos: await productosAPI.getAll() };
-    //     io.sockets.emit('productos', resultado);
-    // });
+// socket.on('addItem', async (data) => {
+//     //grabar item en archivo
+//     const a = await productosAPI.save(data);
+//     //hacer io.sockets.emit con todos los productos
+//     const resultado = { productos: await productosAPI.getAll() };
+//     io.sockets.emit('productos', resultado);
+// });
 
-    socket.on('newMessage', async (data) => {
-        //grabar item en archivo
-        const a = await messagesAPI.save(data);
-        //hacer io.sockets.emit con todos los productos
-        const resultado = { messages: await messagesAPI.getAll() };
-        io.sockets.emit('messages', resultado);
-    });
-});
+//     socket.on('newMessage', async (data) => {
+//         //grabar item en archivo
+//         const a = await messagesAPI.save(data);
+//         //hacer io.sockets.emit con todos los productos
+//         const resultado = { messages: await messagesAPI.getAll() };
+//         io.sockets.emit('messages', resultado);
+//     });
+// });
 
-/*============================[Servidor]============================*/
+/*============================[Server]============================*/
 
 //Si se ingresa parametro MODE cluster
 if (config.MODE == 'cluster') {
     if (cluster.isMaster) {
         loggerDefault.info(`Cluster mode`);
         loggerDefault.info(`Master ${process.pid} is running`);
-        // console.log('entro en cluster');
-        // console.log(`Master ${process.pid} is running`);
         //For workers
         for (let i = 0; i < numCPUs; i++) {
             cluster.fork();
         }
         cluster.on('listening', (worker, address) => {
             loggerDefault.info(`Worker ${worker.process.pid} is listening in  ${address.port}`);
-            //console.log(`Worker ${worker.process.pid} is listening in  ${address.port}`);
         });
     } else {
         const server = httpServer.listen(config.PORT, () => {
             loggerDefault.info(`Servidor http escuchando en el puerto ${server.address().port}`);
-            //console.log(`Servidor http escuchando en el puerto ${server.address().port}`);
         });
 
         server.on('error', (error) => {
             loggerError.error(`Error en servidor! ${error}`);
-            //console.log(`Error en servidor ${error}`);
         });
     }
 } else {
     loggerDefault.info(`Fork mode`);
-    //console.log('entro en modo fork');
 
     //Si no se, realiza en modo fork
     const server = httpServer.listen(config.PORT, () => {
         loggerDefault.info(`Servidor http escuchando en el puerto ${server.address().port}`);
-        //console.log(`Servidor http escuchando en el puerto ${server.address().port}`);
     });
     server.on('error', (error) => {
         loggerError.error(`Error en servidor! ${error}`);
-        //console.log(`Error en servidor ${error}`);
     });
 }
