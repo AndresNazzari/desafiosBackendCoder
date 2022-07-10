@@ -1,56 +1,37 @@
 const express = require('express');
 const router = express.Router();
-const Cart = require('../../models/Cart.model.js');
-const User = require('../../models/User.model.js');
-const Product = require('../../models/Product.model.js');
-const sendEMail = require('../../config/nodemailer.js').sendEMail;
-const sendWA = require('../../middleware/twilio.js').sendWA;
 const isAuth = require('../../middleware/auth.middleware.js');
-const ProductosAPI = require('../../api/productos.api');
-const productosAPI = new ProductosAPI();
+const {
+    getProductosController,
+    getProductoController,
+    postProductoController,
+    putProductoController,
+    deleteProductoController,
+} = require('../../controllers/productos.controller.js');
 
 //@route    GET /api/productos/
 //@desc     devuelve todos los productos
-//@access   Provate
-router.get('/', isAuth, async (req, res) => {
-    //productosAPI.createProducts(); Esto se ejecuta 1 sola vez para crear los productos en mongo
-    const productos = await productosAPI.getProductos();
+//@access   Private
+router.get('/', isAuth, getProductosController);
 
-    //aca quiero devolver como json los productos
+//@route    GET /productos/:id
+//@desc     devuelve un producto según su id
+//@access   Private
+router.get('/:id', isAuth, getProductoController);
 
-    //res.status(200).json(productos);
-    res.status(200).end(JSON.stringify(productos));
+//@route    POST /api/productos/
+//@desc     recibe y agrega un producto, y lo devuelve con su id asignado
+//@access   Private
+router.post('/', isAuth, postProductoController);
 
-    //res.render('productos', { email: req.session.passport.user, productos: productos });
-});
+//@route    PUT /api/productos/:id
+//@desc     recibe y actualiza un producto según su id
+//@access   Private
+router.put('/:id', isAuth, putProductoController);
 
-router.post('/', isAuth, async (req, res) => {
-    //agregar producto al carrito
-    const item = await Product.findOne({ id: Number(Object.keys(req.body)[0]) });
-    const cart = await Cart.findOne({ email: req.session.passport.user });
-
-    if (cart) {
-        cart.items.push(item);
-        await cart.save();
-    } else {
-        const newCart = new Cart({ email: req.session.passport.user, items: [item] });
-        await newCart.save();
-    }
-    res.redirect('/api/productos');
-});
-
-router.post('/finalizar', isAuth, async (req, res) => {
-    console.log('Finalizar');
-    try {
-        const cart = await Cart.findOne({ email: req.session.passport.user });
-        const user = await User.findOne({ email: req.session.passport.user });
-        await sendEMail(req.session.passport.user, false, cart);
-        await sendWA(user, cart);
-        await Cart.deleteOne({ email: req.session.passport.user });
-        res.redirect('/api/productos');
-    } catch (err) {
-        console.log(err);
-    }
-});
+//@route    DELETE /api/productos/:id
+//@desc     elimina un producto según su id
+//@access   Private
+router.delete('/:id', isAuth, deleteProductoController);
 
 module.exports = router;
