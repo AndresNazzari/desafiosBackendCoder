@@ -6,6 +6,7 @@ export default {
     PORT: args.port || process.env.PORT || 3000,
     MONGO_URI: process.env.MONGO_URI || '',
     MODE: args.mode || process.env.MODE || 'fork',
+    DAO: args.dao || process.env.DAO || 'mongo',
     FIREBASE: {
         type: process.env.type,
         project_id: process.env.project_id,

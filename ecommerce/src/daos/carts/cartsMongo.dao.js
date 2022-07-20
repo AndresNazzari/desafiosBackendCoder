@@ -1,15 +1,14 @@
-import { ContenedorMongo } from '../../classes/ContenedorMongo.js';
-import { Carrito } from '../../models/Carrito.js';
-import { Producto } from '../../models/Producto.js';
+import MongoContainer from '../../containers/mongo.container.js';
+import { Cart } from '../../models/Cart.model.js';
 
-export class CarritosDaoMongo extends ContenedorMongo {
+export default class CartMongoDao extends MongoContainer {
     constructor(collection) {
         super(collection);
     }
 
     async crearCarrito() {
         try {
-            const nuevoCarrito = new Carrito({});
+            const nuevoCarrito = new Cart({});
             return await nuevoCarrito.save();
         } catch (error) {
             throw new Error(`Error en Save! ${error.message}`);
@@ -18,7 +17,7 @@ export class CarritosDaoMongo extends ContenedorMongo {
 
     async getPoductosEnCarrito(carritoId) {
         try {
-            const carritoEncontrado = await Carrito.findById(carritoId);
+            const carritoEncontrado = await Cart.findById(carritoId);
             return carritoEncontrado
                 ? carritoEncontrado.productos
                 : { msg: 'no se encontraron productos para el carrit' };
@@ -29,7 +28,7 @@ export class CarritosDaoMongo extends ContenedorMongo {
 
     async saveProductosEnCarrito(idCarrito, idProducto) {
         try {
-            const carritoEncontrado = await Carrito.findById(idCarrito);
+            const carritoEncontrado = await Cart.findById(idCarrito);
             const productoEncontrado = await super.getById(idProducto);
             carritoEncontrado.productos.push(productoEncontrado[0]);
             await carritoEncontrado.save();
@@ -40,7 +39,7 @@ export class CarritosDaoMongo extends ContenedorMongo {
 
     async deleteProducto(carritoId, productoId) {
         try {
-            const carritoEncontrado = await Carrito.findById(carritoId);
+            const carritoEncontrado = await Cart.findById(carritoId);
             const porductosRestantes = carritoEncontrado.productos.find((producto) => producto._id != productoId);
             if (porductosRestantes) {
                 carritoEncontrado.productos = porductosRestantes;

@@ -1,9 +1,10 @@
 import admin from 'firebase-admin';
-import config from './config.js';
-import { loggerDefault, loggerError } from './logger.config.js';
+import config from '../config/config.js';
+import { loggerDefault, loggerError } from '../config/logger.config.js';
+
+const db = config.FIREBASE;
 
 export const firebaseDB = async () => {
-    const db = config.FIREBASE;
     try {
         admin.initializeApp({
             credential: admin.credential.cert(db),

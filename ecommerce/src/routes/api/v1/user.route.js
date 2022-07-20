@@ -1,7 +1,7 @@
 import express from 'express';
 import { check } from 'express-validator';
 
-export class UserRoute extends express.Router {
+export default class UserRoute extends express.Router {
     constructor() {
         super();
 

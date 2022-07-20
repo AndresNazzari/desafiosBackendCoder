@@ -1,7 +1,7 @@
 import express from 'express';
 import { check } from 'express-validator';
 
-export class CartRoute extends express.Router {
+export default class CartRoute extends express.Router {
     constructor() {
         super();
 

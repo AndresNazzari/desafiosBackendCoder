@@ -18,14 +18,8 @@ let carritosApi;
 
 switch (db) {
     case 'fs':
-        const productosFile = path.join(
-            process.cwd(),
-            '/proyectoFinal/db/productos.txt'
-        );
-        const carritosFile = path.join(
-            process.cwd(),
-            '/proyectoFinal/db/carritos.txt'
-        );
+        const productosFile = path.join(process.cwd(), '/proyectoFinal/db/productos.txt');
+        const carritosFile = path.join(process.cwd(), '/proyectoFinal/db/carritos.txt');
         productosApi = new ProductosDaoFs(productosFile);
         carritosApi = new CarritosDaoFs(carritosFile);
         break;

@@ -19,9 +19,7 @@ export class ContenedorMongo {
 
     async getAll() {
         try {
-            return this.collection == 'productos'
-                ? await Producto.find({})
-                : await Carrito.find({});
+            return this.collection == 'productos' ? await Producto.find({}) : await Carrito.find({});
         } catch (error) {
             console.log(error);
             return [];
