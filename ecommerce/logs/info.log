@@ -1,0 +1,55 @@
+[2022-07-19T17:05:42.497] [INFO] default - Acceso a: ruta /api/v1/products y método GET correcto
+[2022-07-19T17:05:53.607] [INFO] default - Acceso a: ruta /api/v1/products y método GET correcto
+[2022-07-19T18:36:19.369] [INFO] default - Acceso a: ruta /api/v1/products y método GET correcto
+[2022-07-19T18:36:34.224] [INFO] default - Acceso a: ruta /api/v2/products y método GET correcto
+[2022-07-19T18:36:52.261] [INFO] default - Acceso a: ruta /api/v1/products y método GET correcto
+[2022-07-19T21:18:01.358] [INFO] default - Server is running in fork mode on port 3000
+[2022-07-19T21:18:10.531] [INFO] default - Server is running in fork mode on port 3000
+[2022-07-19T21:18:16.539] [INFO] default - Server is running in fork mode on port 3000
+[2022-07-19T21:18:26.459] [INFO] default - Server is running in fork mode on port 3000
+[2022-07-19T21:18:28.160] [INFO] default - Server is running in fork mode on port 3000
+[2022-07-19T21:18:34.946] [INFO] default - Server is running in fork mode on port 3000
+[2022-07-19T21:18:48.511] [INFO] default - Server is running in fork mode on port 3000
+[2022-07-19T21:19:31.715] [INFO] default - Server is running in fork mode on port 3000
+[2022-07-19T21:19:42.209] [INFO] default - Server is running in fork mode on port 3000
+[2022-07-19T21:19:46.316] [INFO] default - Server is running in fork mode on port 3000
+[2022-07-19T21:19:57.020] [INFO] default - Server is running in fork mode on port 3000
+[2022-07-19T21:20:14.237] [INFO] default - Server is running in fork mode on port 3000
+[2022-07-19T21:20:19.870] [INFO] default - Server is running in fork mode on port 3000
+[2022-07-19T21:20:26.402] [INFO] default - Server is running in fork mode on port 3000
+[2022-07-19T21:20:40.343] [INFO] default - Server is running in fork mode on port 3000
+[2022-07-19T21:20:51.211] [INFO] default - Server is running in fork mode on port 3000
+[2022-07-19T21:20:54.916] [INFO] default - Server is running in fork mode on port 3000
+[2022-07-19T21:21:59.375] [INFO] default - Server is running in fork mode on port 3000
+[2022-07-19T21:22:02.071] [INFO] default - Server is running in fork mode on port 3000
+[2022-07-19T21:34:05.372] [INFO] default - Server is running in FORK mode on port 8080
+[2022-07-19T21:34:06.876] [INFO] default - MongoDB Connected...
+[2022-07-19T21:34:10.907] [INFO] default - Server is running in FORK mode on port 8080
+[2022-07-19T21:34:12.390] [INFO] default - MongoDB Connected...
+[2022-07-19T21:34:21.100] [INFO] default - Server is running in FORK mode on port 8080
+[2022-07-19T21:34:22.517] [INFO] default - MongoDB Connected...
+[2022-07-19T21:34:31.492] [INFO] default - MongoDB Connected...
+[2022-07-19T21:34:31.499] [INFO] default - Server is running in FORK mode on port 8080
+[2022-07-19T21:34:39.080] [INFO] default - MongoDB Connected...
+[2022-07-19T21:34:39.086] [INFO] default - Server is running in FORK mode on port 8080
+[2022-07-19T21:34:41.468] [INFO] default - MongoDB Connected...
+[2022-07-19T21:34:41.474] [INFO] default - Server is running in FORK mode on port 8080
+[2022-07-19T21:34:53.759] [INFO] default - MongoDB Connected...
+[2022-07-19T21:34:53.765] [INFO] default - Server is running in FORK mode on port 8080
+[2022-07-19T21:35:23.514] [INFO] default - MongoDB Connected...
+[2022-07-19T21:35:23.520] [INFO] default - Server is running in FORK mode on port 8080
+[2022-07-19T21:35:41.866] [INFO] default - MongoDB Connected...
+[2022-07-19T21:35:41.873] [INFO] default - Server is running in FORK mode on port 8080
+[2022-07-19T21:36:29.261] [INFO] default - MongoDB Connected...
+[2022-07-19T21:36:29.267] [INFO] default - Server is running in FORK mode on port 8080
+[2022-07-19T21:38:08.216] [INFO] default - Server is running in FORK mode on port 8080
+[2022-07-19T21:38:10.411] [INFO] default - Server is running in FORK mode on port 8080
+[2022-07-19T21:39:20.768] [INFO] default - Server is running in FORK mode on port 8080
+[2022-07-19T21:39:24.408] [INFO] default - Server is running in FORK mode on port 8080
+[2022-07-19T21:39:26.208] [INFO] default - Server is running in FORK mode on port 8080
+[2022-07-19T21:39:28.253] [INFO] default - Server is running in FORK mode on port 8080
+[2022-07-19T21:39:37.656] [INFO] default - Server is running in FORK mode on port 8080
+[2022-07-19T21:39:44.501] [INFO] default - Server is running in FORK mode on port 8080
+[2022-07-19T21:39:50.223] [INFO] default - Server is running in FORK mode on port 8080
+[2022-07-19T21:45:14.690] [INFO] default - Server is running in FORK mode on port 8080
+[2022-07-19T21:45:53.694] [INFO] default - Server is running in FORK mode on port 8080
