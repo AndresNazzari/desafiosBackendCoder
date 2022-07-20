@@ -14,4 +14,11 @@ export default class ProductsMongoDao extends MongoContainer {
             return { msg: `Error en Update! ${error.message}` };
         }
     }
+
+    static getInstance() {
+        if (!ProductsMongoDao.instance) {
+            ProductsMongoDao.instance = new ProductsMongoDao('products');
+        }
+        return ProductsMongoDao.instance;
+    }
 }

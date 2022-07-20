@@ -2,7 +2,7 @@ import ProductsService from '../services/products.service.js';
 
 export default class ProductsController {
     constructor() {
-        this.productsService = new ProductsService();
+        this.productsService = ProductsService.getInstance();
 
         this.getProducts = this.getProducts.bind(this);
         this.getProduct = this.getProduct.bind(this);
@@ -39,5 +39,12 @@ export default class ProductsController {
         const id = req.params.id;
         const response = await this.productsService.deleteProduct({ _id: id });
         res.status(200).json(response);
+    }
+
+    static getInstance() {
+        if (!ProductsController.instance) {
+            ProductsController.instance = new ProductsController();
+        }
+        return ProductsController.instance;
     }
 }

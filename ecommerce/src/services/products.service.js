@@ -25,4 +25,11 @@ export default class ProductService {
     async deleteProduct(id) {
         return await productsApi.deleteById(id);
     }
+
+    static getInstance() {
+        if (!ProductService.instance) {
+            ProductService.instance = new ProductService();
+        }
+        return ProductService.instance;
+    }
 }

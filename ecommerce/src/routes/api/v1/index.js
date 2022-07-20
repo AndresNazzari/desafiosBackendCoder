@@ -5,7 +5,7 @@ import CartsRoute from './carts.route.js';
 
 const router = Express.Router();
 
-router.use('/products', new ProductsRoute());
+router.use('/products', ProductsRoute.getInstance());
 router.use('/user', new UserRoute());
 router.use('/carts', new CartsRoute());
 

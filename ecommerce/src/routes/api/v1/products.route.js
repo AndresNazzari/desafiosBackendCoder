@@ -32,4 +32,11 @@ export default class ProductsRoute extends express.Router {
         //@access   Public
         this.delete('/:id', this.productsController.deleteProduct);
     }
+
+    static getInstance() {
+        if (!ProductsRoute.instance) {
+            ProductsRoute.instance = new ProductsRoute();
+        }
+        return ProductsRoute.instance;
+    }
 }

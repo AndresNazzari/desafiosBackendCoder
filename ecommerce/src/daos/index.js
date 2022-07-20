@@ -18,7 +18,7 @@ switch (db) {
         break;
     case 'mongo':
         await mongoDB();
-        productsApi = new ProductsMongoDao('products');
+        productsApi = ProductsMongoDao.getInstance();
         cartsApi = new CartsMongoDao('carts');
         break;
 }
