@@ -5,7 +5,7 @@ import ProductsController from '../../../controllers/products.controller.js';
 export default class ProductsRoute extends express.Router {
     constructor() {
         super();
-        this.productsController = new ProductsController();
+        this.productsController = ProductsController.getInstance();
 
         //@route    GET api/v1/products
         //@desc     Register User

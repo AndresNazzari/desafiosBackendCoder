@@ -1,9 +1,7 @@
-import { productsApi, cartsApi } from '../daos/index.js';
+import { productsApi } from '../daos/index.js';
 import { Product } from '../models/Product.model.js';
 
 export default class ProductService {
-    constructor() {}
-
     async getProducts() {
         return await productsApi.getAll();
     }
