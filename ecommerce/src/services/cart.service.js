@@ -1,23 +1,43 @@
 import { cartsApi, productsApi } from '../daos/index.js';
 
-import { Cart } from '../models/Cart.model.js';
-
 export default class CartService {
     async getProductsInCart(id) {
         const cart = await cartsApi.getById(id);
         return cart.items.length > 0 ? cart.items : { msg: `empty cart` };
     }
+    async getCartById(id) {
+        return await cartsApi.getById(id);
+    }
+
+    async getCartByEmail(email) {
+        return await cartsApi.getByEmail(email);
+    }
 
     async postCart(email) {
-        const newCart = new Cart({ email });
-        return await cartsApi.addNew(newCart);
+        return await cartsApi.addNewCart(email);
     }
 
     async postProductInCart(cartId, productId, qty) {
-        const product = await productsApi.getById(productId);
         const cart = await cartsApi.getById(cartId);
-        cart.items.push(product);
-        return await cartsApi.addNew(cart);
+
+        const prodInCart = cart.items.find((item) => {
+            return item._id == productId;
+        });
+
+        if (!prodInCart) {
+            const product = await productsApi.getById(productId);
+            await cartsApi.addProductInCart(product, cart, qty);
+            cart.items[cart.items.length - 1].qty += qty;
+        } else {
+            const index = cart.items.findIndex((item) => {
+                return item._id == productId;
+            });
+            cart.items[index].qty += qty;
+        }
+
+        const pepe = await cart.save();
+        //por alguna razon, devuelve el carrito actualizado pero no lo almacena en mongo
+        return pepe;
     }
 
     async deleteProductInCart(cartId, productId) {
@@ -28,7 +48,7 @@ export default class CartService {
 
         if (newItems) {
             cart.items = newItems;
-            await cartsApi.addNew(cart);
+            await cart.save();
             return { msg: 'producto eliminado eliminado' };
         } else {
             return {

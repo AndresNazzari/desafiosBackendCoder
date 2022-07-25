@@ -6,15 +6,6 @@ export default class MongoContainer {
         this.collection = collection;
     }
 
-    async addNew(obj) {
-        try {
-            return await obj.save();
-        } catch (error) {
-            console.log(error.message);
-            return [];
-        }
-    }
-
     async getAll() {
         try {
             return this.collection == 'products' ? await Product.find({}) : await Cart.find({});

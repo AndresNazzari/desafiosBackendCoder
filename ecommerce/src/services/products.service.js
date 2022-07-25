@@ -1,5 +1,4 @@
 import { productsApi } from '../daos/index.js';
-import { Product } from '../models/Product.model.js';
 
 export default class ProductService {
     async getProducts() {
@@ -10,10 +9,7 @@ export default class ProductService {
     }
 
     async postProduct(product) {
-        const newProduct = new Product({
-            ...product,
-        });
-        return await productsApi.addNew(newProduct);
+        return await productsApi.addNewProduct(product);
     }
 
     async putProduct(id, product) {

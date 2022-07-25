@@ -19,7 +19,14 @@ export default class CartRoute extends express.Router {
         //@route    POST /api/carrito/
         //@desc     Para incorporar productos al carrito por su id de producto
         //@access   Public
-        this.post('/:id/products', this.cartController.postProductInCart);
+        this.post(
+            '/:id/products',
+            [
+                check('id', 'Product id is Required').not().isEmpty(),
+                check('qty', 'Quantity must be integer >-1').isInt({ min: 0 }),
+            ],
+            this.cartController.postProductInCart
+        );
 
         //@route    DELETE /api/carrito/
         //@desc     Para eliminar producto del carrito por su id de producto

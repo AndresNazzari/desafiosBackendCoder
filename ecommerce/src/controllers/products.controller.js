@@ -1,5 +1,5 @@
 import ProductsService from '../services/products.service.js';
-
+import { validationResult } from 'express-validator';
 export default class ProductsController {
     constructor() {
         this.productsService = ProductsService.getInstance();
@@ -23,6 +23,11 @@ export default class ProductsController {
     }
 
     async postProduct(req, res) {
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            return res.status(400).json({ errors: errors.array() });
+        }
+
         const product = req.body;
         const response = await this.productsService.postProduct(product);
         res.status(200).json(response);
@@ -37,8 +42,9 @@ export default class ProductsController {
 
     async deleteProduct(req, res) {
         const id = req.params.id;
+        const deletedProduct = await this.productsService.getProduct({ _id: id });
         const response = await this.productsService.deleteProduct({ _id: id });
-        res.status(200).json(response);
+        res.status(200).json({ ...response, product: deletedProduct });
     }
 
     static getInstance() {

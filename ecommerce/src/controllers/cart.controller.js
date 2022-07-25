@@ -19,8 +19,14 @@ export default class CartController {
 
     async postCart(req, res) {
         const email = req.body.email;
-        const response = await this.cartService.postCart(email);
-        res.status(200).json(response);
+        const cartExists = await this.cartService.getCartByEmail(email);
+
+        if (!cartExists) {
+            const response = await this.cartService.postCart(email);
+            res.status(200).json(response);
+        } else {
+            res.status(200).json({ cart: cartExists });
+        }
     }
 
     async postProductInCart(req, res) {
@@ -40,8 +46,9 @@ export default class CartController {
 
     async deleteCart(req, res) {
         const id = req.params.id;
+        const deletedCart = await this.cartService.getCartById({ _id: id });
         const response = await this.cartService.deleteCart(id);
-        res.status(200).json(response);
+        res.status(200).json({ ...response, cart: deletedCart });
     }
 
     static getInstance() {
