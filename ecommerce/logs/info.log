@@ -2047,3 +2047,31 @@
 [2022-07-27T12:14:00.914] [INFO] default - Server is running in FORK mode on port 3000
 [2022-07-27T12:14:12.615] [INFO] default - MongoDB Connected...
 [2022-07-27T12:14:12.633] [INFO] default - Server is running in FORK mode on port 3000
+[2022-07-27T12:21:59.498] [INFO] default - MongoDB Connected...
+[2022-07-27T12:21:59.507] [INFO] default - Server is running in FORK mode on port 3000
+[2022-07-27T12:22:19.544] [INFO] default - MongoDB Connected...
+[2022-07-27T12:22:19.559] [INFO] default - Server is running in FORK mode on port 3000
+[2022-07-27T12:22:21.065] [INFO] default - Acceso a: ruta /api/v1/products y método POST correcto
+[2022-07-27T12:22:21.243] [INFO] default - Acceso a: ruta /api/v1/products y método POST correcto
+[2022-07-27T12:22:21.394] [INFO] default - Acceso a: ruta /api/v1/products y método GET correcto
+[2022-07-27T12:22:21.555] [INFO] default - Acceso a: ruta /api/v1/products y método GET correcto
+[2022-07-27T12:22:21.712] [INFO] default - Acceso a: ruta /api/v1/products/62e0af6d1ca264d119446deb y método GET correcto
+[2022-07-27T12:22:21.866] [INFO] default - Acceso a: ruta /api/v1/products/62e0af6d1ca264d119446deb y método GET correcto
+[2022-07-27T12:22:22.011] [INFO] default - Acceso a: ruta /api/v1/products/62e0af6d1ca264d119446deb y método DELETE correcto
+[2022-07-27T12:22:22.285] [INFO] default - Acceso a: ruta /api/v1/products/62e0af6d1ca264d119446ded y método DELETE correcto
+[2022-07-27T12:22:28.790] [INFO] default - Acceso a: ruta /api/v1/products y método POST correcto
+[2022-07-27T12:22:28.941] [INFO] default - Acceso a: ruta /api/v1/products y método POST correcto
+[2022-07-27T12:22:29.095] [INFO] default - Acceso a: ruta /api/v1/products y método GET correcto
+[2022-07-27T12:22:29.237] [INFO] default - Acceso a: ruta /api/v1/products y método GET correcto
+[2022-07-27T12:22:29.375] [INFO] default - Acceso a: ruta /api/v1/products/62e0af741ca264d119446df7 y método GET correcto
+[2022-07-27T12:22:29.514] [INFO] default - Acceso a: ruta /api/v1/products/62e0af741ca264d119446df7 y método GET correcto
+[2022-07-27T12:22:29.651] [INFO] default - Acceso a: ruta /api/v1/products/62e0af741ca264d119446df7 y método DELETE correcto
+[2022-07-27T12:22:29.925] [INFO] default - Acceso a: ruta /api/v1/products/62e0af741ca264d119446df9 y método DELETE correcto
+[2022-07-27T12:23:22.587] [INFO] default - Acceso a: ruta /api/v1/products y método POST correcto
+[2022-07-27T12:23:22.734] [INFO] default - Acceso a: ruta /api/v1/products y método POST correcto
+[2022-07-27T12:23:22.886] [INFO] default - Acceso a: ruta /api/v1/products y método GET correcto
+[2022-07-27T12:23:23.029] [INFO] default - Acceso a: ruta /api/v1/products y método GET correcto
+[2022-07-27T12:23:23.168] [INFO] default - Acceso a: ruta /api/v1/products/62e0afaa1ca264d119446e03 y método GET correcto
+[2022-07-27T12:23:23.304] [INFO] default - Acceso a: ruta /api/v1/products/62e0afaa1ca264d119446e03 y método GET correcto
+[2022-07-27T12:23:23.440] [INFO] default - Acceso a: ruta /api/v1/products/62e0afaa1ca264d119446e03 y método DELETE correcto
+[2022-07-27T12:23:23.719] [INFO] default - Acceso a: ruta /api/v1/products/62e0afaa1ca264d119446e05 y método DELETE correcto

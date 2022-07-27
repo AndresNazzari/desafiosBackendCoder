@@ -24,7 +24,7 @@ app.use(Express.urlencoded({ extended: true }));
 
 /*==================================[Routes]==================================*/
 
-//app.use(defaultLogger); //loguea todas las requests
+app.use(defaultLogger); //loguea todas las requests
 
 app.use('/api/v1/', apiRouter); //rutas de la api
 
