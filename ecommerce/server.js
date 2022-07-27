@@ -11,7 +11,7 @@ import { defaultLogger, warnLogger } from './src/middlewares/loggers.middleware.
 import { loggerDefault, loggerError } from './src/config/logger.config.js';
 
 /*==================================[Config]=================================*/
-const app = Express();
+export const app = Express();
 const httpServer = http.Server(app);
 const ioServer = new Server(httpServer);
 
@@ -24,7 +24,7 @@ app.use(Express.urlencoded({ extended: true }));
 
 /*==================================[Routes]==================================*/
 
-app.use(defaultLogger); //loguea todas las requests
+//app.use(defaultLogger); //loguea todas las requests
 
 app.use('/api/v1/', apiRouter); //rutas de la api
 

@@ -5,7 +5,7 @@
     "type": "module",
     "scripts": {
         "start": "nodemon server.js",
-        "test": "mocha"
+        "test": "mocha ./src/**/*.test.js"
     },
     "author": "",
     "license": "ISC",
@@ -25,10 +25,11 @@
         "nodemailer": "^6.7.7",
         "nodemon": "^2.0.19",
         "socket.io": "^4.5.1",
-        "to": "^0.2.9",
-        "update": "^0.4.2"
+        "supertest": "^6.2.4"
     },
     "devDependencies": {
+        "chai": "^4.3.6",
+        "chai-http": "^4.3.0",
         "mocha": "^10.0.0"
     }
 }
