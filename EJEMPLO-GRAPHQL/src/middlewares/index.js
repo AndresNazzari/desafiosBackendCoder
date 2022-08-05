@@ -1,0 +1,1 @@
+export {isAdministrator} from './isAdministrator.js'

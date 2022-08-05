@@ -1,0 +1,96 @@
+[
+   {
+      "title": "primer PRODUCTO",
+      "price": 2200,
+      "thumbnail": "https.google.com",
+      "id": 1
+   },
+   {
+      "title": "segundo producto",
+      "price": 2200,
+      "thumbnail": "https.google.com",
+      "id": 2
+   },
+   {
+      "title": "tercer producto",
+      "price": 2200,
+      "thumbnail": "https.google.com",
+      "id": 3
+   },
+   {
+      "title": "tercer producto",
+      "price": 2200,
+      "thumbnail": "https.google.com",
+      "id": 4
+   },
+   {
+      "title": "NUEVASO producto",
+      "price": 2200,
+      "thumbnail": "https.google.com",
+      "codigo": "AB214",
+      "id": 5
+   },
+   {
+      "title": "new producto",
+      "price": 2200,
+      "thumbnail": "https.google.com",
+      "codigo": "AB214",
+      "id": 6
+   },
+   {
+      "title": "arch producto",
+      "price": 2200,
+      "thumbnail": "https.google.com",
+      "codigo": "AB214",
+      "id": 7
+   },
+   {
+      "title": "arch producto",
+      "price": 2200,
+      "thumbnail": "https.google.com",
+      "codigo": "AB214",
+      "id": 8
+   },
+   {
+      "title": "GRRAPHQL",
+      "price": 300,
+      "thumbnail": "htpp",
+      "codigo": "COD219",
+      "id": 9
+   },
+   {
+      "title": "GRRAPHQL",
+      "price": 300,
+      "thumbnail": "htpp",
+      "codigo": "COD219",
+      "id": 10
+   },
+   {
+      "title": "Prueba Prod",
+      "price": 600,
+      "thumbnail": "httpthumnail",
+      "codigo": "COD499",
+      "id": 11
+   },
+   {
+      "title": "Prueba Prod",
+      "price": 600,
+      "thumbnail": "httpthumnail",
+      "codigo": "COD499",
+      "id": 12
+   },
+   {
+      "title": "Prueba Graphql",
+      "price": 600,
+      "thumbnail": "httpthumnail",
+      "codigo": "COD492",
+      "id": 13
+   },
+   {
+      "title": "Prueba Prod",
+      "price": 600,
+      "thumbnail": "httpthumnail",
+      "codigo": "Cod2",
+      "id": 14
+   }
+]

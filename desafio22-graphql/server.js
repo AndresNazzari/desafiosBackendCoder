@@ -10,6 +10,11 @@ import apiRouter from './src/routes/api/v1/index.js';
 import { defaultLogger, warnLogger } from './src/middlewares/loggers.middleware.js';
 import { loggerDefault, loggerError } from './src/config/logger.config.js';
 
+// lo nuevo, para graph
+import { graphqlHTTP } from 'express-graphql';
+// lo unico que nos traemos es el schema
+import { schema } from './src/graphql/index.js';
+
 /*==================================[Config]=================================*/
 export const app = Express();
 const httpServer = http.Server(app);
@@ -27,6 +32,7 @@ app.use(Express.urlencoded({ extended: true }));
 app.use(defaultLogger); //loguea todas las requests
 
 app.use('/api/v1/', apiRouter); //rutas de la api
+app.use('/graphql', graphqlHTTP({ graphiql: true, schema })); //rutas de graphql
 
 app.use(warnLogger); //loguea acceso a recursos inexistentes
 /*=================================[Websokets]===============================*/

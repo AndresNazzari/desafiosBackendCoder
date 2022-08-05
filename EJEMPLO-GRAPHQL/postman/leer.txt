@@ -1,0 +1,1 @@
+Importar el json en Postman, para cargar la colección de prueba que hice
