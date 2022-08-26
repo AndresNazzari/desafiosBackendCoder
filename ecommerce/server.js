@@ -9,7 +9,8 @@ import compression from 'compression';
 import apiRouter from './src/routes/api/v1/index.js';
 import { defaultLogger, warnLogger } from './src/middlewares/loggers.middleware.js';
 import { loggerDefault, loggerError } from './src/config/logger.config.js';
-
+import swaggerUi from 'swagger-ui-express';
+import swaggerSpecs from './src/config/swagger.js';
 /*==================================[Config]=================================*/
 export const app = Express();
 const httpServer = http.Server(app);
@@ -27,34 +28,35 @@ app.use(Express.urlencoded({ extended: true }));
 app.use(defaultLogger); //loguea todas las requests
 
 app.use('/api/v1/', apiRouter); //rutas de la api
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpecs));
 
 app.use(warnLogger); //loguea acceso a recursos inexistentes
 /*=================================[Websokets]===============================*/
 
 /*==================================[Server]=============================y=====*/
 if (config.MODE == 'cluster') {
-    if (cluster.isPrimary) {
-        loggerDefault.info('Server is running in cluster mode');
-        for (let i = 0; i < os.cpus().length; i++) {
-            cluster.fork();
-        }
-        cluster.on('listening', (worker, address) => {
-            loggerDefault.info(`Worker ${worker.process.pid} connected to ${address.address}:${address.port}`);
-        });
-    } else {
-        const server = httpServer.listen(config.PORT, () => {
-            loggerDefault.info(`Server is running in worker mode on port ${config.PORT}`);
-        });
-        server.on('error', (error) => {
-            loggerError.error(`Error en servidor! ${error}`);
-        });
+  if (cluster.isPrimary) {
+    loggerDefault.info('Server is running in cluster mode');
+    for (let i = 0; i < os.cpus().length; i++) {
+      cluster.fork();
     }
-} else {
+    cluster.on('listening', (worker, address) => {
+      loggerDefault.info(`Worker ${worker.process.pid} connected to ${address.address}:${address.port}`);
+    });
+  } else {
     const server = httpServer.listen(config.PORT, () => {
-        loggerDefault.info(`Server is running in ${config.MODE} mode on port ${config.PORT}`);
+      loggerDefault.info(`Server is running in worker mode on port ${config.PORT}`);
     });
-
     server.on('error', (error) => {
-        loggerError.error(`Error en servidor! ${error}`);
+      loggerError.error(`Error en servidor! ${error}`);
     });
+  }
+} else {
+  const server = httpServer.listen(config.PORT, () => {
+    loggerDefault.info(`Server is running in ${config.MODE} mode on port ${config.PORT}`);
+  });
+
+  server.on('error', (error) => {
+    loggerError.error(`Error en servidor! ${error}`);
+  });
 }
