@@ -1,19 +1,23 @@
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import config from '../config/config.js';
-import { authApi } from '../daos/index.js';
+import { authApi, mailApi } from '../daos/index.js';
 
 export default class AuthService {
   async userExistsService(email) {
     const user = await authApi.getUserByEmail(email);
+    if (!user) {
+      return false;
+    }
     return user._doc;
   }
 
-  async registerUserService(username, adress, email, password, roleId) {
+  async registerUserService(adress, email, password, roleId) {
     const passwordHash = await this.encryptPassword(password);
-    const userData = { username, adress, email, password: passwordHash, roleId };
+    const userData = { adress, email, password: passwordHash, roleId };
 
     const newUser = await authApi.createUser(userData);
+    await mailApi.sendEmail(newUser, true);
 
     return { ...userData, id: newUser.id };
   }

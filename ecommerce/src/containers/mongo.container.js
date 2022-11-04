@@ -3,7 +3,7 @@ import { Product } from '../models/Product.model.js';
 
 export default class MongoContainer {
   constructor(collection) {
-    this.collection = collection;
+    this.collection = collection || 'carts';
   }
 
   async getAll() {

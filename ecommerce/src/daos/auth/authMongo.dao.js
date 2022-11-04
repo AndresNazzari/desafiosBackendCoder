@@ -3,8 +3,8 @@ import MongoContainer from '../../containers/mongo.container.js';
 
 export default class AuthMongoDao extends MongoContainer {
   //TODO verificar si realmente es conveniente que herede de container
-  constructor(collection) {
-    super(collection);
+  constructor() {
+    super();
   }
   async getUserByEmail(email) {
     return User.findOne({ email });
@@ -17,7 +17,7 @@ export default class AuthMongoDao extends MongoContainer {
 
   static getInstance() {
     if (!AuthMongoDao.instance) {
-      AuthMongoDao.instance = new AuthMongoDao('carts');
+      AuthMongoDao.instance = new AuthMongoDao();
     }
     return AuthMongoDao.instance;
   }

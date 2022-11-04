@@ -1,6 +1,6 @@
-const os = require('os');
+import os from 'os';
 
-class InfoApi {
+export default class InfoApi {
   getInfo() {
     return {
       argEntrada: process.argv,
@@ -13,5 +13,10 @@ class InfoApi {
       numCPUs: os.cpus().length,
     };
   }
+  static getInstance() {
+    if (!InfoApi.instance) {
+      InfoApi.instance = new InfoApi();
+    }
+    return InfoApi.instance;
+  }
 }
-module.exports = InfoApi;

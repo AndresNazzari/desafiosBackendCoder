@@ -7,10 +7,12 @@ import cluster from 'cluster';
 import os from 'os';
 import compression from 'compression';
 import apiRouter from './src/routes/api/v1/index.js';
+import webRouter from './src/routes/web/index.js';
 import { defaultLogger, warnLogger } from './src/middlewares/loggers.middleware.js';
 import { loggerDefault, loggerError } from './src/config/logger.config.js';
 import swaggerUi from 'swagger-ui-express';
 import swaggerSpecs from './src/config/swagger.js';
+import exphbs from 'express-handlebars';
 /*==================================[Config]=================================*/
 export const app = Express();
 const httpServer = http.Server(app);
@@ -23,15 +25,32 @@ app.use(compression());
 app.use(Express.json());
 app.use(Express.urlencoded({ extended: true }));
 
+/*----------- Motor de plantillas -----------*/
+app.engine(
+  'hbs',
+  exphbs.engine({
+    extname: '.hbs',
+    defaultLayout: 'index.hbs',
+    layoutDir: './src/views/layouts',
+    partialDir: './src/views/partials',
+    runtimeOptions: {
+      allowProtoPropertiesByDefault: true,
+      allowProtoMethodsByDefault: true,
+    },
+  })
+);
+app.set('view engine', 'hbs');
+app.set('views', './src/views');
 /*==================================[Routes]==================================*/
 
 app.use(defaultLogger); //loguea todas las requests
 
 app.use('/api/v1/', apiRouter); //rutas de la api
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpecs));
-
+app.use('/', webRouter);
 app.use(warnLogger); //loguea acceso a recursos inexistentes
 /*=================================[Websokets]===============================*/
+//TODO implementar websoket para el chat
 
 /*==================================[Server]=============================y=====*/
 if (config.MODE == 'cluster') {
